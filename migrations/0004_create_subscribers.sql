@@ -1,0 +1,5 @@
+CREATE TABLE subscribers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT UNIQUE NOT NULL,
+    created_at TEXT NOT NULL
+);
