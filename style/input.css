@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Inter:wght@400;500;700&family=Klee+One:wght@400&display=swap");
+@import "tailwindcss";
+
+/* 色票對照 spec.md 第 5.2 節、字體對照第 5.3 節 */
+@theme {
+  --color-brand-blue: #1B3B6F;
+  --color-sky-blue: #4A7FC9;
+  --color-pale-blue: #DCE9FA;
+  --color-mist-blue: #EFF4FA;
+  --color-warm-amber: #E8B975;
+  --color-line-green: #06C755;
+  --color-ink: #1A1A2E;
+  --color-slate-gray: #6B7280;
+  --color-border-gray: #E2E8F0;
+  --color-success-green: #34A853;
+  --color-error-red: #DC2626;
+
+  --font-sans: "Noto Sans TC", "Inter", sans-serif;
+  --font-handwriting: "Klee One", "Noto Sans TC", cursive;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+}
