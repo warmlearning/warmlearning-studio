@@ -3,8 +3,8 @@ resolver = "2"
 members = ["app", "server"]
 
 [[workspace.metadata.leptos]]
-name = "zhinuan-studio"
-output-name = "zhinuan-studio"
+name = "warmlearning-studio"
+output-name = "warmlearning-studio"
 bin-package = "server"
 lib-package = "app"
 

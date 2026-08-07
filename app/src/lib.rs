@@ -34,7 +34,7 @@ pub fn App() -> impl IntoView {
     provide_meta_context();
 
     view! {
-        <Stylesheet id="leptos" href="/pkg/zhinuan-studio.css"/>
+        <Stylesheet id="leptos" href="/pkg/warmlearning-studio.css"/>
         <Title text="知暖學習工作室"/>
 
         <Router>

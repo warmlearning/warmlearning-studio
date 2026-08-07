@@ -19,3 +19,6 @@ tower-sessions = "0.15.0"
 tower-sessions-sqlx-store = { version = "0.15.0", features = ["sqlite"] }
 tracing = "0.1.44"
 tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }
+
+[features]
+ssr = ["app/ssr", "leptos/ssr", "leptos_meta/ssr", "leptos_router/ssr"]
