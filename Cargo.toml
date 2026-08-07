@@ -1,0 +1,25 @@
+[workspace]
+resolver = "2"
+members = ["app", "server"]
+
+[[workspace.metadata.leptos]]
+name = "warmlearning-studio"
+output-name = "warmlearning-studio"
+bin-package = "server"
+lib-package = "app"
+
+site-root = "target/site"
+site-pkg-dir = "pkg"
+tailwind-input-file = "style/input.css"
+assets-dir = "public"
+site-addr = "127.0.0.1:8080"
+reload-port = 3001
+browserquery = "defaults"
+watch = false
+env = "DEV"
+
+bin-features = ["ssr"]
+bin-default-features = false
+
+lib-features = ["hydrate"]
+lib-default-features = false
