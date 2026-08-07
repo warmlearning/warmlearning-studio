@@ -103,12 +103,7 @@ fn TimelineSection() -> impl IntoView {
                             view! {
                                 <div id=stage.anchor class="scroll-mt-24">
                                     <div class="flex flex-col items-center gap-8 lg:flex-row">
-                                        <img
-                                            src=stage.image
-                                            alt=format!("{} 插圖", stage.title)
-                                            class="w-full max-w-xs flex-shrink-0 lg:max-w-sm"
-                                        />
-                                        <div class="flex-1">
+                                        <div class="flex-1 lg:order-2">
                                             <h2 class="text-2xl font-bold text-brand-blue">
                                                 {stage.emoji} " " {stage.title}
                                             </h2>
@@ -135,6 +130,11 @@ fn TimelineSection() -> impl IntoView {
                                                 </div>
                                             </dl>
                                         </div>
+                                        <img
+                                            src=stage.image
+                                            alt=format!("{} 插圖", stage.title)
+                                            class="w-full max-w-xs flex-shrink-0 lg:order-1 lg:max-w-sm"
+                                        />
                                     </div>
                                 </div>
                             }

@@ -69,7 +69,7 @@ pub fn HomePage() -> impl IntoView {
 fn HeroSection() -> impl IntoView {
     view! {
         <section class="bg-gradient-to-b from-mist-blue to-white">
-            <div class="mx-auto flex max-w-7xl flex-col-reverse items-center gap-10 px-6 py-16 lg:flex-row lg:py-24">
+            <div class="mx-auto flex max-w-7xl flex-col items-center gap-10 px-6 py-16 lg:flex-row lg:py-24">
                 <div class="flex flex-1 flex-col items-start gap-5 text-left">
                     <p class="font-handwriting text-lg text-sky-blue">"♡ 知足上進，溫暖而堅定"</p>
                     <h1 class="text-4xl font-bold leading-[1.3] text-brand-blue lg:text-5xl">
@@ -140,14 +140,14 @@ fn WhyChooseSection() -> impl IntoView {
                         "看更多：AI 輔助學習怎麼做？"
                     </summary>
                     <div class="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center">
+                        <p class="text-sm leading-[1.7] text-slate-gray sm:order-2">
+                            "AI 正在改變學習方式，而知暖希望帶領學生學會善用 AI，而不是依賴 AI。我們將 AI 工具融入英文學習，引導學生練習口說、寫作、閱讀理解、情境對話與自主複習，提升學習效率與思考能力。課程更重視如何正確提問、整理資訊及培養自主學習策略，讓科技成為學習的助力，而不是答案的替代品，幫助學生建立未來不可或缺的英語與 AI 素養。"
+                        </p>
                         <img
                             src="/img/illustration-ai-feature.png"
                             alt="AI 輔助學習插圖：機器人與 ABC 字母"
-                            class="w-32 flex-shrink-0 sm:w-40"
+                            class="w-32 flex-shrink-0 sm:order-1 sm:w-40"
                         />
-                        <p class="text-sm leading-[1.7] text-slate-gray">
-                            "AI 正在改變學習方式，而知暖希望帶領學生學會善用 AI，而不是依賴 AI。我們將 AI 工具融入英文學習，引導學生練習口說、寫作、閱讀理解、情境對話與自主複習，提升學習效率與思考能力。課程更重視如何正確提問、整理資訊及培養自主學習策略，讓科技成為學習的助力，而不是答案的替代品，幫助學生建立未來不可或缺的英語與 AI 素養。"
-                        </p>
                     </div>
                 </details>
             </div>
@@ -269,18 +269,18 @@ fn FounderSection() -> impl IntoView {
     view! {
         <section class="bg-white">
             <div class="mx-auto flex max-w-7xl flex-col items-center gap-10 px-6 py-16 lg:flex-row lg:py-24">
-                // TODO: Penny 個人照片尚未提供（見 docs/asset-list.md「人物照片」）
-                <ImagePlaceholder
-                    label="創辦人照片準備中"
-                    class="aspect-square w-full max-w-xs rounded-2xl flex-shrink-0"
-                />
-                <div class="flex-1 text-center lg:text-left">
+                <div class="flex-1 text-center lg:order-2 lg:text-left">
                     <blockquote class="text-xl font-medium leading-[1.7] text-ink">
                         "Hi，我是 Penny。我相信，每個孩子都能找到適合自己的學習方式。我們教的不只是英文，而是一輩子的學習能力。"
                     </blockquote>
                     // TODO: 簡短資歷標註（教學年資等）尚未提供，待補充後移除下方提示文字
                     <p class="mt-4 text-sm text-slate-gray">"教學資歷｜資料整理中"</p>
                 </div>
+                // TODO: Penny 個人照片尚未提供（見 docs/asset-list.md「人物照片」）
+                <ImagePlaceholder
+                    label="創辦人照片準備中"
+                    class="aspect-square w-full max-w-xs rounded-2xl flex-shrink-0 lg:order-1"
+                />
             </div>
         </section>
     }

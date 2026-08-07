@@ -76,12 +76,7 @@ fn FounderSection() -> impl IntoView {
     view! {
         <section class="bg-mist-blue">
             <div class="mx-auto flex max-w-7xl flex-col items-center gap-10 px-6 py-16 lg:flex-row lg:py-24">
-                // TODO: Penny 個人照片尚未提供（見 docs/asset-list.md「人物照片」）
-                <ImagePlaceholder
-                    label="創辦人照片準備中"
-                    class="aspect-square w-full max-w-xs rounded-2xl flex-shrink-0"
-                />
-                <div class="flex-1 text-center lg:text-left">
+                <div class="flex-1 text-center lg:order-2 lg:text-left">
                     <h2 class="text-2xl font-bold text-brand-blue">"創辦人 Penny"</h2>
                     <blockquote class="mt-4 text-lg leading-[1.7] text-ink">
                         "Hi，我是 Penny。我相信，每個孩子都能找到適合自己的學習方式。我們教的不只是英文，而是一輩子的學習能力。"
@@ -89,6 +84,11 @@ fn FounderSection() -> impl IntoView {
                     // TODO: 完整經歷（教學年資、證照、專長）尚未提供，見 spec.md 4.2 ②
                     <p class="mt-4 text-sm text-slate-gray">"完整經歷（教學年資、證照、專長）｜資料整理中"</p>
                 </div>
+                // TODO: Penny 個人照片尚未提供（見 docs/asset-list.md「人物照片」）
+                <ImagePlaceholder
+                    label="創辦人照片準備中"
+                    class="aspect-square w-full max-w-xs rounded-2xl flex-shrink-0 lg:order-1"
+                />
             </div>
         </section>
     }
