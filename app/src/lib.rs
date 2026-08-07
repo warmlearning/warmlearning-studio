@@ -10,6 +10,7 @@ pub mod pages;
 pub mod components;
 
 use components::{Footer, Navbar};
+use pages::about::AboutPage;
 use pages::home::HomePage;
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
@@ -43,6 +44,7 @@ pub fn App() -> impl IntoView {
             <main>
                 <Routes fallback=|| view! { <p class="px-6 py-24 text-center">"這個頁面好像不小心迷路了"</p> }>
                     <Route path=StaticSegment("") view=HomePage/>
+                    <Route path=StaticSegment("about") view=AboutPage/>
                 </Routes>
             </main>
             <Footer/>
