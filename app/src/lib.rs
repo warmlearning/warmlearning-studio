@@ -13,6 +13,7 @@ use components::{Footer, Navbar};
 use pages::about::AboutPage;
 use pages::courses::CoursesPage;
 use pages::home::HomePage;
+use pages::privacy::PrivacyPage;
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
@@ -47,6 +48,7 @@ pub fn App() -> impl IntoView {
                     <Route path=StaticSegment("") view=HomePage/>
                     <Route path=StaticSegment("about") view=AboutPage/>
                     <Route path=StaticSegment("courses") view=CoursesPage/>
+                    <Route path=StaticSegment("privacy") view=PrivacyPage/>
                 </Routes>
             </main>
             <Footer/>
