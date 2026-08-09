@@ -8,50 +8,6 @@ const LINE_URL: &str = "https://line.me/R/ti/p/@891ivojl";
 
 const COURSE_OPTIONS: [&str; 6] = ["國小英文", "國中英文", "高中英文", "成人英文", "線上親子共學", "尚未確定"];
 
-#[cfg(feature = "ssr")]
-async fn send_contact_notification_email(
-    name: &str,
-    phone: &str,
-    course_interest: &str,
-    message: &str,
-) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-    use lettre::message::Mailbox;
-    use lettre::transport::smtp::authentication::Credentials;
-    use lettre::{AsyncSmtpTransport, AsyncTransport, Message, Tokio1Executor};
-
-    let smtp_host = std::env::var("SMTP_HOST")?;
-    let smtp_port: u16 = std::env::var("SMTP_PORT")
-        .unwrap_or_else(|_| "587".to_string())
-        .parse()?;
-    let smtp_username = std::env::var("SMTP_USERNAME")?;
-    let smtp_app_password = std::env::var("SMTP_APP_PASSWORD")?;
-    let notify_email = std::env::var("CONTACT_NOTIFY_EMAIL")?;
-
-    let course_interest_display = if course_interest.is_empty() { "尚未填寫" } else { course_interest };
-    let message_display = if message.is_empty() { "（無留言）" } else { message };
-
-    let body = format!(
-        "知暖官網收到一筆新的聯絡表單留言：\n\n姓名：{name}\n電話：{phone}\n想諮詢的課程：{course_interest_display}\n留言內容：\n{message_display}\n"
-    );
-
-    let email = Message::builder()
-        .from(smtp_username.parse::<Mailbox>()?)
-        .to(notify_email.parse::<Mailbox>()?)
-        .subject(format!("【知暖官網】新的聯絡表單留言 - {name}"))
-        .body(body)?;
-
-    let creds = Credentials::new(smtp_username.clone(), smtp_app_password);
-
-    let mailer = AsyncSmtpTransport::<Tokio1Executor>::relay(&smtp_host)?
-        .port(smtp_port)
-        .credentials(creds)
-        .build();
-
-    mailer.send(email).await?;
-
-    Ok(())
-}
-
 /// 聯絡表單送出，對照 spec.md 4.5 節與 9.4 節 honeypot 防機器人規範
 #[server(SubmitContactForm, "/api")]
 pub async fn submit_contact_form(
@@ -104,10 +60,8 @@ pub async fn submit_contact_form(
         ServerFnError::new("送出失敗，請稍後再試")
     })?;
 
-    if let Err(e) = send_contact_notification_email(name, phone, course_interest, message).await {
-        // Email 通知失敗不影響表單送出結果（資料已寫入資料庫），僅記錄 log 供事後排查
-        tracing::error!("寄送聯絡表單通知信失敗: {e}");
-    }
+    // TODO: Email 通知功能延後實作，待確認是否需要對 Gmail 帳號開啟兩步驟驗證後再處理，
+    // 聯絡表單資料可透過後台查看
 
     Ok(())
 }
