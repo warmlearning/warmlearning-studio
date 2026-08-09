@@ -9,7 +9,11 @@ use leptos_router::{
 pub mod pages;
 pub mod components;
 
+use components::{Footer, Navbar};
+use pages::about::AboutPage;
+use pages::courses::CoursesPage;
 use pages::home::HomePage;
+use pages::privacy::PrivacyPage;
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
@@ -38,11 +42,16 @@ pub fn App() -> impl IntoView {
         <Title text="知暖學習工作室"/>
 
         <Router>
+            <Navbar/>
             <main>
-                <Routes fallback=|| view! { <p>"這個頁面好像不小心迷路了"</p> }>
+                <Routes fallback=|| view! { <p class="px-6 py-24 text-center">"這個頁面好像不小心迷路了"</p> }>
                     <Route path=StaticSegment("") view=HomePage/>
+                    <Route path=StaticSegment("about") view=AboutPage/>
+                    <Route path=StaticSegment("courses") view=CoursesPage/>
+                    <Route path=StaticSegment("privacy") view=PrivacyPage/>
                 </Routes>
             </main>
+            <Footer/>
         </Router>
     }
 }
