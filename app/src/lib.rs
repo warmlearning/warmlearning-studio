@@ -3,7 +3,7 @@ use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
 use leptos_router::{
     components::{Route, Router, Routes},
-    StaticSegment,
+    ParamSegment, StaticSegment,
 };
 
 pub mod pages;
@@ -14,6 +14,7 @@ use pages::about::AboutPage;
 use pages::contact::ContactPage;
 use pages::courses::CoursesPage;
 use pages::home::HomePage;
+use pages::news::{NewsDetailPage, NewsListPage};
 use pages::privacy::PrivacyPage;
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
@@ -50,6 +51,8 @@ pub fn App() -> impl IntoView {
                     <Route path=StaticSegment("about") view=AboutPage/>
                     <Route path=StaticSegment("courses") view=CoursesPage/>
                     <Route path=StaticSegment("contact") view=ContactPage/>
+                    <Route path=StaticSegment("news") view=NewsListPage/>
+                    <Route path=(StaticSegment("news"), ParamSegment("slug")) view=NewsDetailPage/>
                     <Route path=StaticSegment("privacy") view=PrivacyPage/>
                 </Routes>
             </main>
