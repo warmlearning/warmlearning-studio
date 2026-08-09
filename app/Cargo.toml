@@ -11,8 +11,12 @@ console_error_panic_hook = { version = "0.1.7", optional = true }
 leptos = "0.8.20"
 leptos_meta = "0.8.6"
 leptos_router = "0.8.15"
+lettre = { version = "0.11.23", default-features = false, features = ["tokio1", "tokio1-native-tls", "smtp-transport", "builder"], optional = true }
+serde = { version = "1.0.229", features = ["derive"] }
+sqlx = { version = "0.9.0", default-features = false, features = ["sqlite", "runtime-tokio", "macros"], optional = true }
+tracing = { version = "0.1.44", optional = true }
 wasm-bindgen = { version = "=0.2.126", optional = true }
 
 [features]
 hydrate = ["leptos/hydrate", "dep:wasm-bindgen", "dep:console_error_panic_hook"]
-ssr = ["leptos/ssr", "leptos_meta/ssr", "leptos_router/ssr"]
+ssr = ["leptos/ssr", "leptos_meta/ssr", "leptos_router/ssr", "dep:sqlx", "dep:lettre", "dep:tracing"]
