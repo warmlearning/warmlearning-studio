@@ -331,9 +331,11 @@ fn AnnouncementForm(id: Option<i64>, initial: Option<AnnouncementEditData>) -> i
         sync_content();
     };
 
+    let save_action_url = <SaveAnnouncement as leptos::server_fn::ServerFn>::url().to_string();
+
     view! {
         <Form
-            action="/api/save_announcement".to_string()
+            action=save_action_url
             method="post"
             enctype="multipart/form-data".to_string()
             attr:class="mt-8 flex flex-col gap-5"
