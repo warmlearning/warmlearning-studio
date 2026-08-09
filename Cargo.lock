@@ -43,6 +43,9 @@ dependencies = [
  "leptos",
  "leptos_meta",
  "leptos_router",
+ "serde",
+ "sqlx 0.9.0",
+ "tracing",
  "wasm-bindgen",
 ]
 
