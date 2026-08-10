@@ -3,9 +3,12 @@ mod db;
 mod routes;
 
 use app::{shell, App};
+use axum::extract::Extension;
+use axum::routing::get;
 use axum::Router;
 use leptos::prelude::provide_context;
 use leptos_axum::{generate_route_list, LeptosRoutes};
+use tower_http::catch_panic::CatchPanicLayer;
 
 #[tokio::main]
 async fn main() {
@@ -28,6 +31,8 @@ async fn main() {
     let routes = generate_route_list(App);
 
     let app = Router::new()
+        .route("/sitemap.xml", get(routes::sitemap_handler))
+        .layer(Extension(pool.clone()))
         .leptos_routes_with_context(
             &leptos_options,
             routes,
@@ -41,6 +46,7 @@ async fn main() {
             },
         )
         .fallback(leptos_axum::file_and_error_handler(shell))
+        .layer(CatchPanicLayer::custom(routes::handle_panic))
         .with_state(leptos_options);
 
     let listener = tokio::net::TcpListener::bind(&addr)

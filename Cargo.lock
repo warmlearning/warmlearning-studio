@@ -40,7 +40,9 @@ name = "app"
 version = "0.1.0"
 dependencies = [
  "console_error_panic_hook",
+ "http",
  "leptos",
+ "leptos_axum",
  "leptos_meta",
  "leptos_router",
  "serde",
@@ -3364,6 +3366,7 @@ dependencies = [
  "tokio-util",
  "tower-layer",
  "tower-service",
+ "tracing",
 ]
 
 [[package]]
