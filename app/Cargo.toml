@@ -7,19 +7,23 @@ edition = "2024"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
+argon2 = { version = "0.5.3", optional = true }
 console_error_panic_hook = { version = "0.1.7", optional = true }
 http = { version = "1", optional = true }
-leptos = "0.8.20"
+image = { version = "0.25.10", default-features = false, features = ["jpeg", "png", "webp"], optional = true }
+leptos = { version = "0.8.20", features = ["multipart"] }
 leptos_axum = { version = "0.8.10", optional = true }
 leptos_meta = "0.8.6"
 leptos_router = "0.8.15"
 serde = { version = "1.0.229", features = ["derive"] }
 sqlx = { version = "0.9.0", default-features = false, features = ["sqlite", "runtime-tokio", "macros"], optional = true }
+tower-sessions = { version = "0.14", default-features = false, features = ["axum-core"], optional = true }
 tracing = { version = "0.1.44", optional = true }
 wasm-bindgen = { version = "=0.2.126", optional = true }
+web-sys = { version = "=0.3.103", features = ["HtmlDocument", "Document", "Window", "Node"], optional = true }
 
 [features]
-hydrate = ["leptos/hydrate", "dep:wasm-bindgen", "dep:console_error_panic_hook"]
+hydrate = ["leptos/hydrate", "dep:wasm-bindgen", "dep:console_error_panic_hook", "dep:web-sys"]
 ssr = [
     "leptos/ssr",
     "leptos_meta/ssr",
@@ -28,4 +32,8 @@ ssr = [
     "dep:tracing",
     "dep:http",
     "dep:leptos_axum",
+    "dep:tower-sessions",
+    "dep:argon2",
+    "dep:image",
+    "dep:web-sys",
 ]

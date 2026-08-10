@@ -2,6 +2,7 @@ use leptos::prelude::*;
 use leptos_meta::{Meta, Title};
 use leptos_router::hooks::{use_params_map, use_query_map};
 
+use crate::admin_auth::friendly_error_message;
 use crate::components::Card;
 
 #[cfg(feature = "ssr")]
@@ -227,7 +228,9 @@ pub fn NewsListPage() -> impl IntoView {
                                 }
                                 Err(e) => {
                                     view! {
-                                        <p class="mt-12 text-center text-error-red">{e.to_string()}</p>
+                                        <p class="mt-12 text-center text-error-red">
+                                            {friendly_error_message(&e)}
+                                        </p>
                                     }
                                         .into_any()
                                 }
@@ -299,7 +302,10 @@ pub fn NewsDetailPage() -> impl IntoView {
                                         .into_any()
                                 }
                                 Err(e) => {
-                                    view! { <p class="text-center text-error-red">{e.to_string()}</p> }.into_any()
+                                    view! {
+                                        <p class="text-center text-error-red">{friendly_error_message(&e)}</p>
+                                    }
+                                        .into_any()
                                 }
                             })
                     }}

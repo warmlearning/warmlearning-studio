@@ -2,6 +2,7 @@ use leptos::form::ActionForm;
 use leptos::prelude::*;
 use leptos_meta::{Meta, Title};
 
+use crate::admin_auth::friendly_error_message;
 use crate::components::icons::{ChatIcon, FacebookIcon, InstagramIcon};
 
 const LINE_URL: &str = "https://line.me/R/ti/p/@891ivojl";
@@ -169,7 +170,7 @@ pub fn ContactPage() -> impl IntoView {
                             Some(Err(e)) => {
                                 view! {
                                     <p class="rounded-xl bg-mist-blue px-4 py-3 text-sm text-error-red">
-                                        {e.to_string()}
+                                        {friendly_error_message(&e)}
                                     </p>
                                 }
                                     .into_any()

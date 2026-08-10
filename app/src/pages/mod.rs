@@ -1,4 +1,9 @@
 pub mod about;
+pub mod admin_announcement_form;
+pub mod admin_announcements;
+pub mod admin_contacts;
+pub mod admin_dashboard;
+pub mod admin_login;
 pub mod contact;
 pub mod courses;
 pub mod home;
