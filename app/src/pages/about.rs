@@ -18,10 +18,10 @@ const KEYWORDS: [Keyword; 4] = [
 #[component]
 pub fn AboutPage() -> impl IntoView {
     view! {
-        <Title text="關於知暖｜陪伴孩子建立自主學習力"/>
+        <Title text="關於知暖 Warm Learning Studio｜陪伴建立自主學習力"/>
         <Meta
             name="description"
-            content="了解知暖學習工作室的創立理念與教育初衷。我們深信陪伴比催促更重要，透過專業教學與溫暖引導，陪伴高雄國小至高中學生建立自主學習能力。"
+            content="了解知暖學習工作室（Warm Learning Studio）的創立理念與教育初衷。我們深信陪伴比催促更重要，透過專業教學與溫暖引導，陪伴高雄幼兒到成人學習者建立自主學習能力。"
         />
 
         <BrandStorySection/>
@@ -33,7 +33,7 @@ pub fn AboutPage() -> impl IntoView {
 #[component]
 fn BrandStorySection() -> impl IntoView {
     view! {
-        <section class="bg-white">
+        <section class="bg-mist-blue">
             <div class="mx-auto max-w-4xl px-6 py-16 lg:py-24">
                 <h1 class="text-center text-3xl font-bold text-brand-blue">"為什麼創立知暖？"</h1>
 
@@ -74,7 +74,7 @@ fn BrandStorySection() -> impl IntoView {
 #[component]
 fn FounderSection() -> impl IntoView {
     view! {
-        <section class="bg-mist-blue">
+        <section class="bg-white">
             <div class="mx-auto flex max-w-7xl flex-col items-center gap-10 px-6 py-16 lg:flex-row lg:py-24">
                 <div class="flex-1 text-center lg:order-2 lg:text-left">
                     <h2 class="text-2xl font-bold text-brand-blue">"創辦人 Penny"</h2>
@@ -97,7 +97,7 @@ fn FounderSection() -> impl IntoView {
 #[component]
 fn VisionSection() -> impl IntoView {
     view! {
-        <section class="bg-white">
+        <section class="bg-mist-blue">
             <div class="mx-auto max-w-3xl px-6 py-16 text-center lg:py-24">
                 <h2 class="text-3xl font-bold text-brand-blue">"品牌願景"</h2>
                 <p class="mt-6 text-lg leading-[1.7] text-ink">

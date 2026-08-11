@@ -73,10 +73,10 @@ pub fn ContactPage() -> impl IntoView {
     let response = submit_action.value();
 
     view! {
-        <Title text="聯絡知暖｜高雄英文課程免費諮詢"/>
+        <Title text="聯絡知暖 Warm Learning Studio｜高雄英文課程免費諮詢"/>
         <Meta
             name="description"
-            content="歡迎聯絡知暖學習工作室，提供高雄國小至高中英文、成人英文課程與免費學習諮詢，協助學生找到適合自己的學習方式，培養自主學習能力。"
+            content="歡迎聯絡知暖學習工作室（Warm Learning Studio），提供高雄幼兒到成人英文課程與免費學習諮詢，協助找到適合的學習方式，建立自主學習系統。"
         />
 
         <ContactInfoSection/>

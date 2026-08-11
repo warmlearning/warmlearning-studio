@@ -25,7 +25,7 @@ pub fn Navbar() -> impl IntoView {
                     <span class="flex flex-col leading-tight">
                         <span class="text-base font-bold text-brand-blue">"知暖學習工作室"</span>
                         <span class="text-xs uppercase tracking-widest text-slate-gray">
-                            "Zhī Nuǎn Learning Studio"
+                            "Warm Learning Studio"
                         </span>
                     </span>
                 </a>
@@ -44,7 +44,7 @@ pub fn Navbar() -> impl IntoView {
                 </nav>
 
                 <div class="hidden lg:block">
-                    <CtaButton href="/contact" label="預約免費試聽" variant=ButtonVariant::Primary/>
+                    <CtaButton href="/contact" label="預約諮詢" variant=ButtonVariant::Primary/>
                 </div>
 
                 <button
@@ -75,7 +75,7 @@ pub fn Navbar() -> impl IntoView {
                         .collect_view()}
                     <CtaButton
                         href="/contact"
-                        label="預約免費試聽"
+                        label="預約諮詢"
                         variant=ButtonVariant::Primary
                         class="w-full".to_string()
                     />
