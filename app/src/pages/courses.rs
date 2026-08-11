@@ -56,16 +56,15 @@ const STAGES: [Stage; 3] = [
 #[component]
 pub fn CoursesPage() -> impl IntoView {
     view! {
-        <Title text="知暖英文課程｜國小高中與成人英文"/>
+        <Title text="知暖英文課程｜幼兒、國小、國中、高中與成人英文"/>
         <Meta
             name="description"
-            content="知暖提供高雄國小、國中、高中英文及成人英文課程，依照學生程度客製化規劃，結合陪伴式教育、自主學習訓練與 AI 應用，提升英文能力與學習成效。"
+            content="知暖學習工作室（Warm Learning Studio）提供高雄幼兒親子共學、國小、國中、高中英文及成人英文課程，依程度客製化規劃，結合陪伴式教育與自主學習訓練，協助建立完整英文學習系統。"
         />
 
         <PageHeader/>
         <TimelineSection/>
         <AddonSection/>
-        <ExtraCoursesSection/>
         <FooterCtaSection/>
     }
 }
@@ -89,7 +88,18 @@ fn TimelineSection() -> impl IntoView {
     view! {
         <section class="bg-white">
             <div class="mx-auto max-w-5xl px-6 py-16 lg:py-24">
-                <p class="text-center text-lg font-medium text-brand-blue">
+                <div id="family" class="scroll-mt-24">
+                    <Card class="p-6".to_string()>
+                        <h2 class="text-xl font-bold text-ink">"幼兒線上親子共學"</h2>
+                        <p class="mt-3 text-sm leading-[1.7] text-slate-gray">
+                            "每次 30 分鐘的線上課程，陪伴孩子從小養成規律接觸英文的習慣，是知暖「持續學習」理念的入門形式，適合學齡前～國小低年級親子一起參與。"
+                        </p>
+                        // TODO: 詳細課程說明文案待 Penny 提供，見 spec.md 4.3 節與 14 待補內容清單
+                        <p class="mt-2 text-sm text-slate-gray">"詳細課程內容｜資料整理中"</p>
+                    </Card>
+                </div>
+
+                <p class="mt-16 text-center text-lg font-medium text-brand-blue">
                     "🌱 國小英文（打底）→ 🚀 國中英文（建立能力）→ 🎓 高中英文（突破）"
                 </p>
                 <p class="mt-2 text-center text-sm text-slate-gray">
@@ -141,6 +151,15 @@ fn TimelineSection() -> impl IntoView {
                         })
                         .collect_view()}
                 </div>
+
+                <div id="adult" class="mt-16 scroll-mt-24">
+                    <Card class="p-6".to_string()>
+                        <h2 class="text-xl font-bold text-ink">"成人英文"</h2>
+                        <p class="mt-3 text-sm leading-[1.7] text-slate-gray">
+                            "學習英文，不該只是背單字、記文法，更重要的是能真正運用在生活與工作中。知暖成人英文課程適合想重新建立英文基礎、提升口說表達、準備職場需求，或希望找回學習自信的學習者。我們採小班互動與陪伴式教學，結合生活情境、實用會話及聽說讀寫整合訓練，依照每位學員的程度調整學習內容，讓英文逐漸融入日常，建立持續學習的習慣與自信。"
+                        </p>
+                    </Card>
+                </div>
             </div>
         </section>
     }
@@ -151,7 +170,7 @@ fn AddonSection() -> impl IntoView {
     view! {
         <section class="bg-mist-blue">
             <div class="mx-auto max-w-5xl px-6 py-16 lg:py-24">
-                <h2 class="text-center text-3xl font-bold text-brand-blue">"加購方案"</h2>
+                <h2 class="text-center text-3xl font-bold text-brand-blue">"學習加值方案"</h2>
                 <div class="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
                     <Card class="relative p-6".to_string()>
                         <span class="absolute right-6 top-6 rounded-md bg-warm-amber px-3 py-1 text-xs font-medium text-ink">
@@ -162,7 +181,6 @@ fn AddonSection() -> impl IntoView {
                         <p class="mt-2 text-sm leading-[1.7] text-slate-gray">
                             "每週學習任務指派、課後訊息追蹤與答疑、自學力與讀書習慣技法養成"
                         </p>
-                        <p class="mt-4 text-sm font-medium text-brand-blue">"每月固定加購費，依諮詢報價"</p>
                     </Card>
 
                     <Card class="p-6".to_string()>
@@ -173,37 +191,12 @@ fn AddonSection() -> impl IntoView {
                         <p class="mt-2 text-sm leading-[1.7] text-slate-gray">
                             "客製學習計畫、模考分析、考前衝刺、弱點分析"
                         </p>
-                        <p class="mt-4 text-sm font-medium text-brand-blue">"依檢定項目另行報價"</p>
                     </Card>
                 </div>
-            </div>
-        </section>
-    }
-}
 
-#[component]
-fn ExtraCoursesSection() -> impl IntoView {
-    view! {
-        <section class="bg-white">
-            <div class="mx-auto max-w-5xl px-6 py-16 lg:py-24">
-                <h2 class="text-center text-3xl font-bold text-brand-blue">"其他課程"</h2>
-
-                <div class="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-2">
-                    <Card id="adult" class="p-6 scroll-mt-24".to_string()>
-                        <h3 class="text-xl font-bold text-ink">"成人英文"</h3>
-                        <p class="mt-3 text-sm leading-[1.7] text-slate-gray">
-                            "學習英文，不該只是背單字、記文法，更重要的是能真正運用在生活與工作中。知暖成人英文課程適合想重新建立英文基礎、提升口說表達、準備職場需求，或希望找回學習自信的學習者。我們採小班互動與陪伴式教學，結合生活情境、實用會話及聽說讀寫整合訓練，依照每位學員的程度調整學習內容，讓英文逐漸融入日常，建立持續學習的習慣與自信。"
-                        </p>
-                    </Card>
-
-                    <Card id="family" class="p-6 scroll-mt-24".to_string()>
-                        <h3 class="text-xl font-bold text-ink">"線上親子共學"</h3>
-                        <p class="mt-3 text-sm leading-[1.7] text-slate-gray">
-                            "每次 30 分鐘的線上課程，陪伴孩子從小養成規律接觸英文的習慣，是知暖「持續學習」理念的入門形式，適合學齡前～國小低年級親子一起參與。"
-                        </p>
-                        // TODO: 詳細課程說明文案待 Penny 提供，見 spec.md 4.3 節與 14 待補內容清單
-                        <p class="mt-2 text-sm text-slate-gray">"詳細課程內容｜資料整理中"</p>
-                    </Card>
+                <div class="mt-10 flex flex-col items-center gap-4 text-center">
+                    <p class="text-sm text-slate-gray">"詳細方案請加入 LINE 諮詢"</p>
+                    <CtaButton href=LINE_URL label="加入 LINE 諮詢" variant=ButtonVariant::Line/>
                 </div>
             </div>
         </section>
@@ -216,7 +209,7 @@ fn FooterCtaSection() -> impl IntoView {
         <section class="bg-mist-blue">
             <div class="mx-auto flex max-w-3xl flex-col items-center gap-4 px-6 py-16 text-center lg:py-24">
                 <p class="text-lg text-ink">"想更了解適合孩子的方案？"</p>
-                <CtaButton href=LINE_URL label="加入 LINE 諮詢，了解適合方案與報價" variant=ButtonVariant::Line/>
+                <CtaButton href=LINE_URL label="加入 LINE 諮詢，了解適合方案" variant=ButtonVariant::Line/>
             </div>
         </section>
     }

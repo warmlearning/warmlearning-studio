@@ -136,13 +136,13 @@ pub fn NewsListPage() -> impl IntoView {
     let announcements = Resource::new(move || page_num.get(), get_published_announcements);
 
     view! {
-        <Title text="知暖最新消息｜英文課程與學習分享"/>
+        <Title text="知暖最新消息｜Warm Learning Studio 英文課程與學習分享"/>
         <Meta
             name="description"
-            content="掌握知暖學習工作室最新課程資訊、英文學習文章、活動公告與教育分享，陪伴高雄國小至高中學生及成人持續提升英文能力與自主學習力。"
+            content="掌握知暖學習工作室（Warm Learning Studio）最新課程資訊、英文學習文章與活動公告，陪伴高雄幼兒到成人學習者持續提升英文能力與自主學習力。"
         />
 
-        <section class="bg-white">
+        <section class="bg-mist-blue">
             <div class="mx-auto max-w-7xl px-6 py-16 lg:py-24">
                 <h1 class="text-center text-3xl font-bold text-brand-blue">"最新消息"</h1>
 

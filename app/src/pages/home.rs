@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 use leptos_meta::{Meta, Title};
 
-use crate::components::icons::{AiIcon, CalendarIcon, HeartIcon, PersonIcon, QuoteIcon, TrendUpIcon};
+use crate::components::icons::{AiIcon, CalendarIcon, HeartIcon, PersonIcon, TrendUpIcon};
 use crate::components::{ButtonVariant, Card, CtaButton, ImagePlaceholder};
 
 const LINE_URL: &str = "https://line.me/R/ti/p/@891ivojl";
@@ -25,11 +25,11 @@ struct CourseCard {
 }
 
 const COURSE_CARDS: [CourseCard; 5] = [
+    CourseCard { title: "幼兒線上親子共學", intro: "每次 30 分鐘，陪孩子養成持續接觸英文的習慣。", anchor: "#family" },
     CourseCard { title: "國小英文", intro: "打好基礎，培養興趣，自然開口說英文。", anchor: "#elementary" },
     CourseCard { title: "國中英文", intro: "系統化文法與閱讀訓練，穩紮穩打打好實力。", anchor: "#middle" },
     CourseCard { title: "高中英文", intro: "大量閱讀與思辨表達，銜接大學英文能力。", anchor: "#high" },
     CourseCard { title: "成人英文", intro: "生活、職場、旅遊英文，自信開口溝通。", anchor: "#adult" },
-    CourseCard { title: "線上親子共學", intro: "每次 30 分鐘，陪孩子養成持續接觸英文的習慣。", anchor: "#family" },
 ];
 
 struct FlowStep {
@@ -38,7 +38,7 @@ struct FlowStep {
 }
 
 const FLOW_STEPS: [FlowStep; 5] = [
-    FlowStep { title: "① 免費諮詢", body: "了解學習需求與目標，提供最適合的課程建議。" },
+    FlowStep { title: "① 預約諮詢", body: "了解學習需求與目標，提供最適合的課程建議。" },
     FlowStep { title: "② 能力評估", body: "透過專業評估，掌握學生目前程度與學習關鍵。" },
     FlowStep { title: "③ 安排試聽", body: "實際體驗課程，找到最適合的學習方式與節奏。" },
     FlowStep { title: "④ 正式課程", body: "依照個人程度規劃內容，循序建立英文能力與學習習慣。" },
@@ -48,10 +48,10 @@ const FLOW_STEPS: [FlowStep; 5] = [
 #[component]
 pub fn HomePage() -> impl IntoView {
     view! {
-        <Title text="知暖英文｜高雄陪伴式英文學習品牌"/>
+        <Title text="知暖英文 Warm Learning Studio｜高雄陪伴式英文學習品牌"/>
         <Meta
             name="description"
-            content="知暖學習工作室位於高雄，提供國小至高中英文與成人英文課程，以陪伴式教育培養自主學習能力，協助學生建立穩固英文基礎、自信與持續成長的學習習慣。"
+            content="知暖學習工作室（Warm Learning Studio）位於高雄，提供幼兒到成人的英文課程，以陪伴式教育培養自主學習能力，協助學習者建立穩固英文基礎與持續成長的學習系統。"
         />
 
         <HeroSection/>
@@ -60,7 +60,6 @@ pub fn HomePage() -> impl IntoView {
         <LearningFlowSection/>
         <ResultsSection/>
         <FounderSection/>
-        <SubscribeSection/>
         <CtaSection/>
     }
 }
@@ -79,7 +78,7 @@ fn HeroSection() -> impl IntoView {
                         "知暖學習陪伴每位孩子建立英文能力、自主學習習慣與未來競爭力。"
                     </p>
                     <div class="flex flex-wrap gap-4 pt-2">
-                        <CtaButton href="/contact" label="免費預約試聽" variant=ButtonVariant::Primary/>
+                        <CtaButton href="/contact" label="預約諮詢" variant=ButtonVariant::Primary/>
                         <CtaButton href="/courses" label="了解課程" variant=ButtonVariant::Secondary/>
                     </div>
                 </div>
@@ -134,22 +133,6 @@ fn WhyChooseSection() -> impl IntoView {
                         })
                         .collect_view()}
                 </div>
-
-                <details class="mx-auto mt-12 max-w-3xl rounded-2xl bg-mist-blue p-6">
-                    <summary class="cursor-pointer font-medium text-brand-blue">
-                        "看更多：AI 輔助學習怎麼做？"
-                    </summary>
-                    <div class="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center">
-                        <p class="text-sm leading-[1.7] text-slate-gray sm:order-2">
-                            "AI 正在改變學習方式，而知暖希望帶領學生學會善用 AI，而不是依賴 AI。我們將 AI 工具融入英文學習，引導學生練習口說、寫作、閱讀理解、情境對話與自主複習，提升學習效率與思考能力。課程更重視如何正確提問、整理資訊及培養自主學習策略，讓科技成為學習的助力，而不是答案的替代品，幫助學生建立未來不可或缺的英語與 AI 素養。"
-                        </p>
-                        <img
-                            src="/img/illustration-ai-feature.png"
-                            alt="AI 輔助學習插圖：機器人與 ABC 字母"
-                            class="w-32 flex-shrink-0 sm:order-1 sm:w-40"
-                        />
-                    </div>
-                </details>
             </div>
         </section>
     }
@@ -199,7 +182,7 @@ fn LearningFlowSection() -> impl IntoView {
     view! {
         <section class="bg-white">
             <div class="mx-auto max-w-7xl px-6 py-16 lg:py-24">
-                <h2 class="text-center text-3xl font-bold text-brand-blue">"教學流程"</h2>
+                <h2 class="text-center text-3xl font-bold text-brand-blue">"如何加入知暖？"</h2>
 
                 <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5">
                     {FLOW_STEPS
@@ -223,38 +206,22 @@ fn LearningFlowSection() -> impl IntoView {
 fn ResultsSection() -> impl IntoView {
     view! {
         <section class="bg-mist-blue">
-            <div class="mx-auto grid max-w-7xl gap-12 px-6 py-16 lg:grid-cols-2 lg:py-24">
-                <div>
-                    <h2 class="text-3xl font-bold text-brand-blue">"學生成果與家長好評"</h2>
-                    // TODO: 以下三項為示意數據，待 Henry／Penny 提供真實數字後替換（spec.md 4.1 ⑤、14 待補內容清單）
-                    <div class="mt-8 grid grid-cols-3 divide-x divide-border-gray">
-                        <div class="px-2 text-center">
-                            <p class="text-3xl font-bold text-brand-blue">"待更新"</p>
-                            <p class="mt-1 text-xs text-slate-gray">"學生成績提升幅度"</p>
-                        </div>
-                        <div class="px-2 text-center">
-                            <p class="text-3xl font-bold text-brand-blue">"待更新"</p>
-                            <p class="mt-1 text-xs text-slate-gray">"學生找到自信與方向"</p>
-                        </div>
-                        <div class="px-2 text-center">
-                            <p class="text-3xl font-bold text-brand-blue">"待更新"</p>
-                            <p class="mt-1 text-xs text-slate-gray">"家長滿意度"</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="mx-auto max-w-7xl px-6 py-16 lg:py-24">
+                <h2 class="text-center text-3xl font-bold text-brand-blue">"學生成果與家長好評"</h2>
 
-                // TODO: 真實家長回饋文字尚未提供（spec.md 4.1 ⑤、14 待補內容清單），以下為佔位卡片
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-3 lg:grid-cols-1">
+                // TODO: 以下為佔位圖片，請替換為實際截圖（如學生作業、感謝訊息、上課花絮等），
+                // 每張圖片下方文字為選填的感言，待 Henry／Penny 提供真實內容後替換
+                <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
                     {(0..3)
                         .map(|_| {
                             view! {
-                                <Card class="p-6".to_string()>
-                                    <div class="text-pale-blue">
-                                        <QuoteIcon/>
-                                    </div>
-                                    <p class="mt-2 text-sm leading-[1.7] text-slate-gray">"家長真實回饋準備中"</p>
-                                    <p class="mt-4 text-xs text-slate-gray">"— 待補充身分標註"</p>
-                                </Card>
+                                <div class="flex flex-col gap-3">
+                                    <ImagePlaceholder
+                                        label="請替換為實際截圖"
+                                        class="aspect-[4/5] w-full rounded-2xl"
+                                    />
+                                    <p class="text-center text-sm text-slate-gray">"家長／學生感言準備中"</p>
+                                </div>
                             }
                         })
                         .collect_view()}
@@ -287,35 +254,6 @@ fn FounderSection() -> impl IntoView {
 }
 
 #[component]
-fn SubscribeSection() -> impl IntoView {
-    view! {
-        <section class="bg-mist-blue">
-            <div class="mx-auto flex max-w-3xl flex-col items-center gap-4 px-6 py-16 text-center">
-                <h2 class="text-2xl font-bold text-brand-blue">"訂閱最新消息"</h2>
-                <p class="text-sm text-slate-gray">"掌握知暖最新課程資訊與學習分享"</p>
-                // NOTE: 表單畫面先行建立，實際寫入 subscribers 資料表的 server function 於 Phase C 建立
-                <form class="flex w-full max-w-md flex-col gap-3 pt-2 sm:flex-row">
-                    <input
-                        type="email"
-                        required
-                        placeholder="輸入您的 Email"
-                        class="flex-1 rounded-full border border-border-gray bg-white px-5 py-3 text-sm text-ink outline-none focus:border-brand-blue"
-                    />
-                    <button
-                        type="submit"
-                        disabled
-                        title="訂閱功能將於 Phase C 開放"
-                        class="rounded-full bg-brand-blue px-8 py-3 font-medium text-white opacity-60"
-                    >
-                        "訂閱"
-                    </button>
-                </form>
-            </div>
-        </section>
-    }
-}
-
-#[component]
 fn CtaSection() -> impl IntoView {
     view! {
         <section class="bg-mist-blue">
@@ -325,11 +263,11 @@ fn CtaSection() -> impl IntoView {
                         <CalendarIcon/>
                     </div>
                     <p class="max-w-xl text-lg leading-[1.7] text-ink">
-                        "知暖陪伴孩子從國小到高中，不只是學好英文，更一步步建立自主學習能力，成為能持續成長的終身學習者。"
+                        "知暖陪伴學習者從幼兒到成人，不只是學好英文，更一步步建立自主學習能力，成為能持續成長的終身學習者。"
                     </p>
                 </div>
                 <div class="flex flex-shrink-0 flex-wrap justify-center gap-4">
-                    <CtaButton href="/contact" label="立即預約免費試聽" variant=ButtonVariant::Primary/>
+                    <CtaButton href="/contact" label="預約諮詢" variant=ButtonVariant::Primary/>
                     <CtaButton href=LINE_URL label="加入 LINE 諮詢" variant=ButtonVariant::Line/>
                 </div>
             </div>
