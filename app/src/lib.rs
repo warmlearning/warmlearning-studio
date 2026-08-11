@@ -22,6 +22,7 @@ use pages::contact::ContactPage;
 use pages::courses::CoursesPage;
 use pages::home::HomePage;
 use pages::news::{NewsDetailPage, NewsListPage};
+use pages::not_found::NotFoundPage;
 use pages::privacy::PrivacyPage;
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
@@ -67,7 +68,7 @@ fn AppShell() -> impl IntoView {
             <Navbar/>
         </Show>
         <main>
-            <Routes fallback=|| view! { <p class="px-6 py-24 text-center">"這個頁面好像不小心迷路了"</p> }>
+            <Routes fallback=NotFoundPage>
                 <Route path=StaticSegment("") view=HomePage/>
                 <Route path=StaticSegment("about") view=AboutPage/>
                 <Route path=StaticSegment("courses") view=CoursesPage/>
