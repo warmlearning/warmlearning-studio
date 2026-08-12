@@ -6,6 +6,7 @@ pub mod admin_dashboard;
 pub mod admin_login;
 pub mod contact;
 pub mod courses;
+pub mod faq;
 pub mod home;
 pub mod news;
 pub mod not_found;

@@ -2,11 +2,12 @@ use leptos::prelude::*;
 
 use super::icons::{BookIcon, ChatIcon, FacebookIcon, InstagramIcon};
 
-const QUICK_LINKS: [(&str, &str); 5] = [
+const QUICK_LINKS: [(&str, &str); 6] = [
     ("/about", "關於知暖"),
     ("/courses", "課程介紹"),
     ("/news", "最新消息"),
     ("/contact", "聯絡我們"),
+    ("/faq", "常見問題"),
     ("/privacy", "隱私權政策"),
 ];
 

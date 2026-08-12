@@ -4,7 +4,7 @@ use axum::response::{IntoResponse, Response};
 
 use crate::db::DbPool;
 
-const STATIC_PAGES: [&str; 5] = ["", "about", "courses", "news", "contact"];
+const STATIC_PAGES: [&str; 6] = ["", "about", "courses", "news", "contact", "faq"];
 
 fn xml_escape(value: &str) -> String {
     value.replace('&', "&amp;").replace('<', "&lt;").replace('>', "&gt;").replace('"', "&quot;")
