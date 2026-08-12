@@ -128,6 +128,12 @@ fn WhyChooseSection() -> impl IntoView {
                                     </div>
                                     <h3 class="text-xl font-bold text-ink">{card.title}</h3>
                                     <p class="text-sm leading-[1.7] text-slate-gray">{card.body}</p>
+                                    <a
+                                        href="/about#long-term-learning"
+                                        class="text-sm font-medium text-brand-blue hover:underline"
+                                    >
+                                        "了解更多"
+                                    </a>
                                 </div>
                             }
                         })

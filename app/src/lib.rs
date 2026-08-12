@@ -20,6 +20,7 @@ use pages::admin_dashboard::AdminDashboardPage;
 use pages::admin_login::AdminLoginPage;
 use pages::contact::ContactPage;
 use pages::courses::CoursesPage;
+use pages::faq::FaqPage;
 use pages::home::HomePage;
 use pages::news::{NewsDetailPage, NewsListPage};
 use pages::not_found::NotFoundPage;
@@ -75,6 +76,7 @@ fn AppShell() -> impl IntoView {
                 <Route path=StaticSegment("contact") view=ContactPage/>
                 <Route path=StaticSegment("news") view=NewsListPage/>
                 <Route path=(StaticSegment("news"), ParamSegment("slug")) view=NewsDetailPage/>
+                <Route path=StaticSegment("faq") view=FaqPage/>
                 <Route path=StaticSegment("privacy") view=PrivacyPage/>
 
                 <Route path=(StaticSegment("admin"), StaticSegment("login")) view=AdminLoginPage/>

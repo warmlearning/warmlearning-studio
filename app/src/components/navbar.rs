@@ -3,12 +3,13 @@ use leptos::prelude::*;
 use super::cta_button::{ButtonVariant, CtaButton};
 use super::icons::{BookIcon, HamburgerIcon};
 
-const NAV_LINKS: [(&str, &str); 5] = [
+const NAV_LINKS: [(&str, &str); 6] = [
     ("/", "首頁"),
     ("/about", "關於知暖"),
     ("/courses", "課程介紹"),
     ("/news", "最新消息"),
     ("/contact", "聯絡我們"),
+    ("/faq", "常見問題"),
 ];
 
 /// Header 導覽列，對照 spec.md 5.4 節 Header 規範

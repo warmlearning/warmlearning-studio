@@ -15,6 +15,14 @@ const KEYWORDS: [Keyword; 4] = [
     Keyword { title: "終身學習", body: "相信學習沒有終點，培養自主學習能力，讓成長成為一輩子的習慣。" },
 ];
 
+const LONG_TERM_PARAGRAPHS: [&str; 5] = [
+    "不只教英文，更教孩子「如何學習」。",
+    "不只服務課堂，更重視課後學習——透過了解系統式陪跑，讓學習延續到每一天。",
+    "建立專屬自己的學習系統，讓學生清楚知道「我在哪裡、為什麼要學、下一步怎麼做」。",
+    "從「被老師帶著學」到「自己知道怎麼學」，培養自主學習與自我調整的能力，而非依賴老師。",
+    "不追求短暫充電，而是培養學習續航力，讓學習熱度持續保溫，從每週一次的課程，變成長期穩定的學習習慣。",
+];
+
 #[component]
 pub fn AboutPage() -> impl IntoView {
     view! {
@@ -25,6 +33,8 @@ pub fn AboutPage() -> impl IntoView {
         />
 
         <BrandStorySection/>
+        <LongTermLearningSection/>
+        <AiFeatureSection/>
         <FounderSection/>
         <VisionSection/>
     }
@@ -71,6 +81,52 @@ fn BrandStorySection() -> impl IntoView {
     }
 }
 
+/// 先「勝」後「戰」・長期主義學習品牌方法論，對照 spec.md 4.2 ② 節（v7 新增）
+#[component]
+fn LongTermLearningSection() -> impl IntoView {
+    view! {
+        <section id="long-term-learning" class="scroll-mt-24 bg-white">
+            <div class="mx-auto max-w-3xl px-6 py-16 lg:py-24">
+                <h2 class="text-center text-3xl font-bold text-brand-blue">
+                    "先「勝」後「戰」・長期主義學習"
+                </h2>
+                <div class="mt-8 flex flex-col gap-5 text-base leading-[1.7] text-ink">
+                    {LONG_TERM_PARAGRAPHS.iter().map(|p| view! { <p>{*p}</p> }).collect_view()}
+                </div>
+            </div>
+        </section>
+    }
+}
+
+/// AI 融入教學，對照 spec.md 4.2 ③ 節（v7 補上實際內文與貼紙標語）
+#[component]
+fn AiFeatureSection() -> impl IntoView {
+    view! {
+        <section class="bg-mist-blue">
+            <div class="mx-auto flex max-w-7xl flex-col items-center gap-10 px-6 py-16 lg:flex-row lg:py-24">
+                <div class="flex-1">
+                    <h2 class="text-3xl font-bold text-brand-blue">"AI 融入教學"</h2>
+                    <p class="mt-6 text-base leading-[1.7] text-ink">
+                        "AI 正在改變學習方式，而知暖希望帶領學生學會善用 AI，而不是依賴 AI。我們將 AI 工具融入英文學習，引導學生練習口說、寫作、閱讀理解、情境對話與自主複習，提升學習效率與思考能力。課程更重視如何正確提問、整理資訊及培養自主學習策略，讓科技成為學習的助力，而不是答案的替代品，幫助學生建立未來不可或缺的英語與 AI 素養。"
+                    </p>
+                </div>
+
+                <div class="relative mx-auto w-full max-w-xs flex-shrink-0 sm:max-w-sm">
+                    <img
+                        src="/img/illustration-ai-feature.png"
+                        alt="AI 輔助學習插圖：機器人與 ABC 字母"
+                        class="w-full"
+                    />
+                    // 全站唯一活潑俏皮語氣的貼紙標語，刻意獨立於周圍文案語氣之外，範圍僅限這個小標籤
+                    <span class="absolute -right-2 -top-2 inline-block max-w-[9rem] -rotate-6 rounded-2xl bg-warm-amber px-3 py-1.5 text-center text-xs font-bold leading-tight text-ink shadow-md sm:-right-4 sm:-top-4">
+                        "讓你從英文廢柴變成英文小天才🔥"
+                    </span>
+                </div>
+            </div>
+        </section>
+    }
+}
+
 #[component]
 fn FounderSection() -> impl IntoView {
     view! {
@@ -81,10 +137,11 @@ fn FounderSection() -> impl IntoView {
                     <blockquote class="mt-4 text-lg leading-[1.7] text-ink">
                         "Hi，我是 Penny。我相信，每個孩子都能找到適合自己的學習方式。我們教的不只是英文，而是一輩子的學習能力。"
                     </blockquote>
-                    // TODO: 完整經歷（教學年資、證照、專長）尚未提供，見 spec.md 4.2 ②
-                    <p class="mt-4 text-sm text-slate-gray">"完整經歷（教學年資、證照、專長）｜資料整理中"</p>
+                    <p class="mt-4 text-sm leading-[1.7] text-slate-gray">
+                        "Penny 擁有 7 年英文教學經驗，擅長在對話中快速理解真正的問題所在，用引導式的提問幫助孩子跟家長釐清想法與目標，而不是急著給答案。她重視關係經營，相信信任感是學習動力的根本；也把多年帶班、辦活動、公開表達的經驗，轉化成一套能被複製、能被系統化執行的教學方法——這也是「知暖成長之旅 Learning Journey」的由來。"
+                    </p>
                 </div>
-                // TODO: Penny 個人照片尚未提供（見 docs/asset-list.md「人物照片」）
+                // TODO: Penny 個人照片尚未正式整合（見 docs/asset-list.md「人物照片」）
                 <ImagePlaceholder
                     label="創辦人照片準備中"
                     class="aspect-square w-full max-w-xs rounded-2xl flex-shrink-0 lg:order-1"
