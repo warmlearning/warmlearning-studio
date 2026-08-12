@@ -45,6 +45,35 @@ const FLOW_STEPS: [FlowStep; 5] = [
     FlowStep { title: "⑤ 成果追蹤", body: "持續檢視學習成果，調整教學策略，陪伴孩子穩定成長。" },
 ];
 
+struct StudentResult {
+    image: &'static str,
+    title: &'static str,
+    narrative: &'static str,
+    highlight: &'static str,
+}
+
+// 內文已去識別化處理，不含真實姓名與健康／心理諮商相關細節（spec.md 4.1⑤ 隱私處理備註）
+const STUDENT_RESULTS: [StudentResult; 3] = [
+    StudentResult {
+        image: "/img/result-1.jpg",
+        title: "①「英文程度落後，但重新找回學習信心」的孩子",
+        narrative: "原本對英文沒有信心、學習意願低落的孩子，透過重新建立基礎與學習方法，逐漸願意主動學習，也開始相信自己做得到。",
+        highlight: "👉 知暖不是只教英文，而是找回孩子的學習信心。",
+    },
+    StudentResult {
+        image: "/img/result-2.jpg",
+        title: "②「成績不一定最差，但缺乏學習習慣」的孩子",
+        narrative: "原本需要家長不斷提醒、缺乏自主學習習慣的孩子，透過陪跑與學習方法建立，慢慢從「被要求學」轉變成「知道自己該怎麼學」。每日練習總結、逐步修正，誠實了解自己的狀況與清晰目標，調整出最適合自己的讀書節奏，運用天賦、擅長處來幫上學習大忙——不再帶著罪惡感休息，能更有效善用時間，玩樂休息取得平衡，相信自己是優秀的。",
+        highlight: "👉 從英文學習延伸到自主學習。",
+    },
+    StudentResult {
+        image: "/img/result-3.jpg",
+        title: "③「願意和老師一起成長的家庭」",
+        narrative: "家長願意與老師合作，不只關注孩子的成績，也願意一起調整陪伴方式，最後讓親子關係與孩子的學習狀態都逐漸變得更穩定。",
+        highlight: "👉 知暖服務的不只是孩子，而是一個家庭。",
+    },
+];
+
 #[component]
 pub fn HomePage() -> impl IntoView {
     view! {
@@ -84,14 +113,15 @@ fn HeroSection() -> impl IntoView {
                 </div>
 
                 <div class="relative flex-1">
-                    // TODO: Hero 主視覺照片尚未提供（見 docs/asset-list.md「人物照片」），待 Penny 自然情境照確定後替換
-                    <ImagePlaceholder
-                        label="Hero 主視覺圖片準備中"
-                        class="aspect-[4/5] w-full max-w-md rounded-2xl mx-auto"
+                    <img
+                        src="/img/hero-photo.jpg"
+                        alt="知暖學習工作室教學情境"
+                        class="aspect-[4/5] w-full max-w-md rounded-2xl mx-auto object-cover"
                     />
                     <div class="absolute bottom-4 right-4 rounded-xl bg-brand-blue/90 px-4 py-3 text-white shadow-lg sm:right-8">
                         <p class="text-sm font-medium">"創辦人 Penny"</p>
-                        // TODO: 教學年資待 Penny 提供確切數字（spec.md 4.1 ⑥）
+                        // TODO: 此處教學年資標註 spec.md 4.1⑥ 仍標示待填寫（4.2④ 的 7 年是另一段敘事文案的數字，
+                        // 不代表本欄位已定案，未經明確確認前不代填）
                         <p class="text-xs text-white/80">"英文教學經驗｜資料整理中"</p>
                     </div>
                 </div>
@@ -215,18 +245,22 @@ fn ResultsSection() -> impl IntoView {
             <div class="mx-auto max-w-7xl px-6 py-16 lg:py-24">
                 <h2 class="text-center text-3xl font-bold text-brand-blue">"學生成果與家長好評"</h2>
 
-                // TODO: 以下為佔位圖片，請替換為實際截圖（如學生作業、感謝訊息、上課花絮等），
-                // 每張圖片下方文字為選填的感言，待 Henry／Penny 提供真實內容後替換
-                <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
-                    {(0..3)
-                        .map(|_| {
+                <div class="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-8">
+                    {STUDENT_RESULTS
+                        .iter()
+                        .map(|result| {
                             view! {
-                                <div class="flex flex-col gap-3">
-                                    <ImagePlaceholder
-                                        label="請替換為實際截圖"
-                                        class="aspect-[4/5] w-full rounded-2xl"
+                                <div class="flex flex-col gap-4">
+                                    <img
+                                        src=result.image
+                                        alt=result.title
+                                        class="aspect-[4/5] w-full max-w-xs mx-auto rounded-2xl object-cover lg:max-w-none"
                                     />
-                                    <p class="text-center text-sm text-slate-gray">"家長／學生感言準備中"</p>
+                                    <div class="flex flex-col gap-2">
+                                        <h3 class="text-base font-bold text-brand-blue">{result.title}</h3>
+                                        <p class="text-sm leading-[1.7] text-slate-gray">{result.narrative}</p>
+                                        <p class="text-sm font-medium text-brand-blue">{result.highlight}</p>
+                                    </div>
                                 </div>
                             }
                         })
@@ -249,10 +283,10 @@ fn FounderSection() -> impl IntoView {
                     // TODO: 簡短資歷標註（教學年資等）尚未提供，待補充後移除下方提示文字
                     <p class="mt-4 text-sm text-slate-gray">"教學資歷｜資料整理中"</p>
                 </div>
-                // TODO: Penny 個人照片尚未提供（見 docs/asset-list.md「人物照片」）
-                <ImagePlaceholder
-                    label="創辦人照片準備中"
-                    class="aspect-square w-full max-w-xs rounded-2xl flex-shrink-0 lg:order-1"
+                <img
+                    src="/img/penny-photo.jpg"
+                    alt="創辦人 Penny"
+                    class="aspect-square w-full max-w-xs rounded-2xl object-cover flex-shrink-0 lg:order-1"
                 />
             </div>
         </section>
