@@ -52,12 +52,13 @@ struct StudentResult {
     highlight: &'static str,
 }
 
-// 內文已去識別化處理，不含真實姓名與健康／心理諮商相關細節（spec.md 4.1⑤ 隱私處理備註）
+// 內文已去識別化處理，不含真實姓名；健康相關描述一律用中性、非診斷性說法呈現，
+// 不點名任何醫療診斷或治療狀態（spec.md 4.1⑤ 隱私處理備註，v9 更新）
 const STUDENT_RESULTS: [StudentResult; 3] = [
     StudentResult {
         image: "/img/result-1.jpg",
         title: "①「英文程度落後，但重新找回學習信心」的孩子",
-        narrative: "原本對英文沒有信心、學習意願低落的孩子，透過重新建立基礎與學習方法，逐漸願意主動學習，也開始相信自己做得到。",
+        narrative: "原本專注力較不集中、對英文沒有信心的孩子，透過重新建立基礎與學習方法，逐漸找到與英文學習的連結點，也開始相信自己做得到。",
         highlight: "👉 知暖不是只教英文，而是找回孩子的學習信心。",
     },
     StudentResult {
@@ -245,16 +246,18 @@ fn ResultsSection() -> impl IntoView {
             <div class="mx-auto max-w-7xl px-6 py-16 lg:py-24">
                 <h2 class="text-center text-3xl font-bold text-brand-blue">"學生成果與家長好評"</h2>
 
-                <div class="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-8">
+                <div class="mt-10 grid grid-cols-1 items-start gap-10 lg:grid-cols-3 lg:gap-8">
                     {STUDENT_RESULTS
                         .iter()
                         .map(|result| {
                             view! {
                                 <div class="flex flex-col gap-4">
+                                    // 圖片維持各自原始比例，不裁切、不強制統一比例，三欄頂部對齊
+                                    // （spec.md 4.1⑤ v9 圖片顯示規則）
                                     <img
                                         src=result.image
                                         alt=result.title
-                                        class="aspect-[4/5] w-full max-w-xs mx-auto rounded-2xl object-cover lg:max-w-none"
+                                        class="h-auto w-full max-w-xs mx-auto rounded-2xl lg:max-w-none"
                                     />
                                     <div class="flex flex-col gap-2">
                                         <h3 class="text-base font-bold text-brand-blue">{result.title}</h3>
