@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 use leptos_meta::{Meta, Title};
 
-use crate::components::{Card, ImagePlaceholder};
+use crate::components::Card;
 
 struct Keyword {
     title: &'static str,
@@ -141,10 +141,10 @@ fn FounderSection() -> impl IntoView {
                         "Penny 擁有 7 年英文教學經驗，擅長在對話中快速理解真正的問題所在，用引導式的提問幫助孩子跟家長釐清想法與目標，而不是急著給答案。她重視關係經營，相信信任感是學習動力的根本；也把多年帶班、辦活動、公開表達的經驗，轉化成一套能被複製、能被系統化執行的教學方法——這也是「知暖成長之旅 Learning Journey」的由來。"
                     </p>
                 </div>
-                // TODO: Penny 個人照片尚未正式整合（見 docs/asset-list.md「人物照片」）
-                <ImagePlaceholder
-                    label="創辦人照片準備中"
-                    class="aspect-square w-full max-w-xs rounded-2xl flex-shrink-0 lg:order-1"
+                <img
+                    src="/img/penny-photo.jpg"
+                    alt="創辦人 Penny"
+                    class="aspect-square w-full max-w-xs rounded-2xl object-cover flex-shrink-0 lg:order-1"
                 />
             </div>
         </section>
