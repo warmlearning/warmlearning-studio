@@ -53,6 +53,34 @@ pub fn reveal_on_scroll(el: web_sys::Element, delay_ms: u32) {
     closure.forget();
 }
 
+/// 掛載時立即淡入＋輕微向上位移，用於非捲動觸發的內容（如骨架屏載入完成後的
+/// 真實內容、聯絡表單送出訊息），對照 spec.md 5.8 節第 2 項。
+/// 用兩次 requestAnimationFrame 確保瀏覽器先以隱藏狀態算過一次樣式，
+/// 之後再移除隱藏 class 才會觸發 CSS transition，而不是直接跳過動畫。
+pub fn fade_in_on_mount(el: web_sys::Element) {
+    if prefers_reduced_motion() {
+        return;
+    }
+
+    let _ = el.class_list().add_2("opacity-0", "translate-y-2");
+
+    let el_for_inner = el.clone();
+    let inner_closure = Closure::once_into_js(move || {
+        let _ = el_for_inner.class_list().remove_2("opacity-0", "translate-y-2");
+    });
+
+    let outer_closure = Closure::once(Box::new(move || {
+        if let Some(window) = web_sys::window() {
+            let _ = window.request_animation_frame(inner_closure.unchecked_ref());
+        }
+    }) as Box<dyn FnOnce()>);
+
+    if let Some(window) = web_sys::window() {
+        let _ = window.request_animation_frame(outer_closure.as_ref().unchecked_ref());
+    }
+    outer_closure.forget();
+}
+
 const FLOATING_BUTTON_SCROLL_THRESHOLD: f64 = 400.0;
 
 fn update_floating_button_visibility(el: &web_sys::Element) {
