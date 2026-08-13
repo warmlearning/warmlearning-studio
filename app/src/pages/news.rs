@@ -3,7 +3,7 @@ use leptos_meta::{Meta, Title};
 use leptos_router::hooks::{use_params_map, use_query_map};
 
 use crate::admin_auth::friendly_error_message;
-use crate::components::Card;
+use crate::components::{Card, Reveal};
 
 #[cfg(feature = "ssr")]
 const PAGE_SIZE: i64 = 9;
@@ -250,7 +250,7 @@ pub fn NewsDetailPage() -> impl IntoView {
 
     view! {
         <section class="bg-white">
-            <div class="mx-auto max-w-3xl px-6 py-16 lg:py-24">
+            <Reveal class="mx-auto max-w-3xl px-6 py-16 lg:py-24".to_string()>
                 <Suspense fallback=move || view! { <p class="text-center text-slate-gray">"載入中…"</p> }>
                     {move || {
                         announcement
@@ -310,7 +310,7 @@ pub fn NewsDetailPage() -> impl IntoView {
                             })
                     }}
                 </Suspense>
-            </div>
+            </Reveal>
         </section>
     }
 }

@@ -4,6 +4,7 @@ use leptos_meta::{Meta, Title};
 
 use crate::admin_auth::friendly_error_message;
 use crate::components::icons::{ChatIcon, FacebookIcon, InstagramIcon};
+use crate::components::Reveal;
 
 const LINE_URL: &str = "https://line.me/R/ti/p/@891ivojl";
 
@@ -82,7 +83,7 @@ pub fn ContactPage() -> impl IntoView {
         <ContactInfoSection/>
 
         <section class="bg-white">
-            <div class="mx-auto max-w-2xl px-6 py-16 lg:py-24">
+            <Reveal class="mx-auto max-w-2xl px-6 py-16 lg:py-24".to_string()>
                 <h2 class="text-center text-3xl font-bold text-brand-blue">"聯絡表單"</h2>
                 <p class="mt-3 text-center text-sm text-slate-gray">
                     "若不方便使用 LINE，也可以透過以下表單留下您的資訊，我們會盡快與您聯繫。"
@@ -179,7 +180,7 @@ pub fn ContactPage() -> impl IntoView {
                         }}
                     </Show>
                 </ActionForm>
-            </div>
+            </Reveal>
         </section>
     }
 }
@@ -188,7 +189,7 @@ pub fn ContactPage() -> impl IntoView {
 fn ContactInfoSection() -> impl IntoView {
     view! {
         <section class="bg-mist-blue">
-            <div class="mx-auto flex max-w-3xl flex-col items-center gap-6 px-6 py-16 text-center lg:py-24">
+            <Reveal class="mx-auto flex max-w-3xl flex-col items-center gap-6 px-6 py-16 text-center lg:py-24".to_string()>
                 <h1 class="text-4xl font-bold text-brand-blue">"聯絡我們"</h1>
                 <p class="max-w-xl text-base leading-[1.7] text-slate-gray">
                     "有任何課程或試聽相關問題，歡迎透過 LINE 官方帳號與我們聯繫，我們會盡快回覆您。"
@@ -228,7 +229,7 @@ fn ContactInfoSection() -> impl IntoView {
                         <FacebookIcon/>
                     </a>
                 </div>
-            </div>
+            </Reveal>
         </section>
     }
 }

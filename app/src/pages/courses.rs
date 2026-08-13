@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 use leptos_meta::{Meta, Title};
 
-use crate::components::{ButtonVariant, Card, CtaButton};
+use crate::components::{ButtonVariant, Card, CtaButton, Reveal};
 
 const LINE_URL: &str = "https://line.me/R/ti/p/@891ivojl";
 
@@ -73,12 +73,12 @@ pub fn CoursesPage() -> impl IntoView {
 fn PageHeader() -> impl IntoView {
     view! {
         <section class="bg-gradient-to-b from-mist-blue to-white">
-            <div class="mx-auto max-w-4xl px-6 py-16 text-center lg:py-24">
+            <Reveal class="mx-auto max-w-4xl px-6 py-16 text-center lg:py-24".to_string()>
                 <h1 class="text-4xl font-bold text-brand-blue">"知暖 Learning Journey"</h1>
                 <p class="mt-4 text-base leading-[1.7] text-slate-gray">
                     "陪伴孩子持續學習、不中斷的成長地圖，而非單堂課程列表。知暖所有課程設計的共同目標，都是讓孩子能長期、穩定地接觸英文，而不是學一下就中斷。"
                 </p>
-            </div>
+            </Reveal>
         </section>
     }
 }
@@ -87,7 +87,7 @@ fn PageHeader() -> impl IntoView {
 fn TimelineSection() -> impl IntoView {
     view! {
         <section class="bg-white">
-            <div class="mx-auto max-w-5xl px-6 py-16 lg:py-24">
+            <Reveal class="mx-auto max-w-5xl px-6 py-16 lg:py-24".to_string()>
                 <div id="family" class="scroll-mt-24">
                     <Card class="p-6".to_string()>
                         <h2 class="text-xl font-bold text-ink">"幼兒線上親子共學"</h2>
@@ -160,7 +160,7 @@ fn TimelineSection() -> impl IntoView {
                         </p>
                     </Card>
                 </div>
-            </div>
+            </Reveal>
         </section>
     }
 }
@@ -169,36 +169,40 @@ fn TimelineSection() -> impl IntoView {
 fn AddonSection() -> impl IntoView {
     view! {
         <section class="bg-mist-blue">
-            <div class="mx-auto max-w-5xl px-6 py-16 lg:py-24">
+            <Reveal class="mx-auto max-w-5xl px-6 py-16 lg:py-24".to_string()>
                 <h2 class="text-center text-3xl font-bold text-brand-blue">"學習加值方案"</h2>
                 <div class="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
-                    <Card class="relative p-6".to_string()>
-                        <span class="absolute right-6 top-6 rounded-md bg-warm-amber px-3 py-1 text-xs font-medium text-ink">
-                            "推薦"
-                        </span>
-                        <h3 class="text-xl font-bold text-ink">"🌿 陪跑續航"</h3>
-                        <p class="mt-2 text-sm text-slate-gray">"適合對象：需要持續陪伴、養成學習習慣的學生"</p>
-                        <p class="mt-2 text-sm leading-[1.7] text-slate-gray">
-                            "每週學習任務指派、課後訊息追蹤與答疑、自學力與讀書習慣技法養成"
-                        </p>
-                    </Card>
+                    <Reveal delay_ms=0u32>
+                        <Card class="relative p-6".to_string()>
+                            <span class="absolute right-6 top-6 rounded-md bg-warm-amber px-3 py-1 text-xs font-medium text-ink">
+                                "推薦"
+                            </span>
+                            <h3 class="text-xl font-bold text-ink">"🌿 陪跑續航"</h3>
+                            <p class="mt-2 text-sm text-slate-gray">"適合對象：需要持續陪伴、養成學習習慣的學生"</p>
+                            <p class="mt-2 text-sm leading-[1.7] text-slate-gray">
+                                "每週學習任務指派、課後訊息追蹤與答疑、自學力與讀書習慣技法養成"
+                            </p>
+                        </Card>
+                    </Reveal>
 
-                    <Card class="p-6".to_string()>
-                        <h3 class="text-xl font-bold text-ink">"🏆 檢定／升學加購"</h3>
-                        <p class="mt-2 text-sm text-slate-gray">
-                            "適合對象：有明確檢定或升學目標的學生（GEPT、全民英檢、會考、學測等）"
-                        </p>
-                        <p class="mt-2 text-sm leading-[1.7] text-slate-gray">
-                            "客製學習計畫、模考分析、考前衝刺、弱點分析"
-                        </p>
-                    </Card>
+                    <Reveal delay_ms=90u32>
+                        <Card class="p-6".to_string()>
+                            <h3 class="text-xl font-bold text-ink">"🏆 檢定／升學加購"</h3>
+                            <p class="mt-2 text-sm text-slate-gray">
+                                "適合對象：有明確檢定或升學目標的學生（GEPT、全民英檢、會考、學測等）"
+                            </p>
+                            <p class="mt-2 text-sm leading-[1.7] text-slate-gray">
+                                "客製學習計畫、模考分析、考前衝刺、弱點分析"
+                            </p>
+                        </Card>
+                    </Reveal>
                 </div>
 
                 <div class="mt-10 flex flex-col items-center gap-4 text-center">
                     <p class="text-sm text-slate-gray">"詳細方案請加入 LINE 諮詢"</p>
                     <CtaButton href=LINE_URL label="加入 LINE 諮詢" variant=ButtonVariant::Line/>
                 </div>
-            </div>
+            </Reveal>
         </section>
     }
 }
@@ -207,10 +211,10 @@ fn AddonSection() -> impl IntoView {
 fn FooterCtaSection() -> impl IntoView {
     view! {
         <section class="bg-mist-blue">
-            <div class="mx-auto flex max-w-3xl flex-col items-center gap-4 px-6 py-16 text-center lg:py-24">
+            <Reveal class="mx-auto flex max-w-3xl flex-col items-center gap-4 px-6 py-16 text-center lg:py-24".to_string()>
                 <p class="text-lg text-ink">"想更了解適合孩子的方案？"</p>
                 <CtaButton href=LINE_URL label="加入 LINE 諮詢，了解適合方案" variant=ButtonVariant::Line/>
-            </div>
+            </Reveal>
         </section>
     }
 }
