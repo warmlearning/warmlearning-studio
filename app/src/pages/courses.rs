@@ -185,7 +185,7 @@ fn AddonSection() -> impl IntoView {
                         </Card>
                     </Reveal>
 
-                    <Reveal delay_ms=90u32>
+                    <Reveal delay_ms=110u32>
                         <Card class="p-6".to_string()>
                             <h3 class="text-xl font-bold text-ink">"🏆 檢定／升學加購"</h3>
                             <p class="mt-2 text-sm text-slate-gray">

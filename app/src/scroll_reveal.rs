@@ -16,15 +16,31 @@ fn prefers_reduced_motion() -> bool {
         .unwrap_or(false)
 }
 
-/// 幫單一元素套用滾動進場動畫：一開始隱藏＋向下偏移，捲動進入可視範圍後淡入回原位，
-/// 只播放一次（離開視窗再捲回不會重複觸發，因為淡入後就不會再被隱藏）
+/// 進場動畫的隱藏狀態 class：透明＋向下偏移 32px＋縮放至 96%（spec.md 5.8 節第 1 項，v11 加大幅度）
+const REVEAL_HIDDEN_CLASSES: [&str; 3] = ["opacity-0", "translate-y-8", "scale-[0.96]"];
+
+/// 幫單一元素套用滾動進場動畫：一開始隱藏＋向下偏移＋縮小，捲動進入可視範圍後
+/// 淡入回原位＋原尺寸；離開可視範圍後重新回到隱藏狀態，再次進入時重新播放
+/// （v11 起改為可重複播放，對照 spec.md 5.8 節第 1 項）。
+///
+/// 效能考量：持續用同一個 IntersectionObserver 訂閱該元素，不呼叫
+/// unobserve／disconnect——這與 v10 版本的作法相同（v10 版本雖然邏輯上「播放一次
+/// 後不再處理」，但實際上也從未主動停止觀察，只是收到後續 callback 時不做事）。
+/// 所以 v11 這個改動並沒有增加 observer 或事件監聽器的數量，只是讓 callback 對
+/// 「離開可視範圍」的情況也做事（重新加回隱藏 class）。每個 Reveal 元件對應一個
+/// 獨立的 observer 實例（不共用／不集中管理），這點在頁面上 Reveal 元件數量很多時
+/// （例如首頁一次有十幾個）會建立相對應數量的 observer，但瀏覽器原生
+/// IntersectionObserver 本身設計上就是給大量元素訂閱使用的，效能開銷遠低於捲動
+/// 事件監聽器，實務上不會造成明顯效能問題；真正需要留意的情境是「同一頁面有數百個
+/// 以上」的規模，遠超過本站任何一頁實際會用到的數量。
 pub fn reveal_on_scroll(el: web_sys::Element, delay_ms: u32) {
     if prefers_reduced_motion() {
         return;
     }
 
-    let _ = el.class_list().add_1("opacity-0");
-    let _ = el.class_list().add_1("translate-y-4");
+    for class in REVEAL_HIDDEN_CLASSES {
+        let _ = el.class_list().add_1(class);
+    }
 
     if delay_ms > 0 {
         if let Some(html_el) = el.dyn_ref::<web_sys::HtmlElement>() {
@@ -35,10 +51,15 @@ pub fn reveal_on_scroll(el: web_sys::Element, delay_ms: u32) {
     let closure = Closure::wrap(Box::new(move |entries: js_sys::Array, _observer: web_sys::IntersectionObserver| {
         for entry in entries.iter() {
             let entry: web_sys::IntersectionObserverEntry = entry.unchecked_into();
+            let target = entry.target();
             if entry.is_intersecting() {
-                let target = entry.target();
-                let _ = target.class_list().remove_1("opacity-0");
-                let _ = target.class_list().remove_1("translate-y-4");
+                for class in REVEAL_HIDDEN_CLASSES {
+                    let _ = target.class_list().remove_1(class);
+                }
+            } else {
+                for class in REVEAL_HIDDEN_CLASSES {
+                    let _ = target.class_list().add_1(class);
+                }
             }
         }
     }) as Box<dyn FnMut(js_sys::Array, web_sys::IntersectionObserver)>);

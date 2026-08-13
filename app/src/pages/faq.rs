@@ -48,7 +48,7 @@ pub fn FaqPage() -> impl IntoView {
                         .enumerate()
                         .map(|(i, faq)| {
                             view! {
-                                <Reveal delay_ms=(i as u32) * 90>
+                                <Reveal delay_ms=(i as u32) * 110>
                                     <div class="rounded-2xl bg-white p-6 shadow-md">
                                         <h2 class="text-lg font-bold text-brand-blue">"Q：" {faq.question}</h2>
                                         <p class="mt-3 text-sm leading-[1.7] text-slate-gray">{faq.answer}</p>
@@ -62,7 +62,7 @@ pub fn FaqPage() -> impl IntoView {
                         .iter()
                         .enumerate()
                         .map(|(i, question)| {
-                            let delay_ms = ((ANSWERED_FAQS.len() + i) as u32) * 90;
+                            let delay_ms = ((ANSWERED_FAQS.len() + i) as u32) * 110;
                             view! {
                                 <Reveal delay_ms=delay_ms>
                                     <div class="rounded-2xl bg-white p-6 shadow-md">

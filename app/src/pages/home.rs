@@ -148,7 +148,7 @@ fn WhyChooseSection() -> impl IntoView {
                         .enumerate()
                         .map(|(i, card)| {
                             view! {
-                                <Reveal delay_ms=(i as u32) * 90>
+                                <Reveal delay_ms=(i as u32) * 110>
                                     <div class="flex flex-col items-center gap-3 text-center">
                                         <div class="flex h-16 w-16 items-center justify-center rounded-full bg-pale-blue text-brand-blue">
                                             {match i {
@@ -190,7 +190,7 @@ fn CoursesSection() -> impl IntoView {
                         .enumerate()
                         .map(|(i, course)| {
                             view! {
-                                <Reveal delay_ms=(i as u32) * 90>
+                                <Reveal delay_ms=(i as u32) * 110>
                                     <Card class="overflow-hidden flex flex-col".to_string()>
                                         // TODO: 課程情境照片待整理歸類（見 docs/asset-list.md「課程情境照片」）
                                         <ImagePlaceholder
@@ -232,7 +232,7 @@ fn LearningFlowSection() -> impl IntoView {
                         .enumerate()
                         .map(|(i, step)| {
                             view! {
-                                <Reveal delay_ms=(i as u32) * 90>
+                                <Reveal delay_ms=(i as u32) * 110>
                                     <div class="flex flex-col items-center gap-2 text-center">
                                         <h3 class="text-lg font-bold text-brand-blue">{step.title}</h3>
                                         <p class="text-sm leading-[1.7] text-slate-gray">{step.body}</p>
@@ -260,7 +260,7 @@ fn ResultsSection() -> impl IntoView {
                         .enumerate()
                         .map(|(i, result)| {
                             view! {
-                                <Reveal delay_ms=(i as u32) * 90>
+                                <Reveal delay_ms=(i as u32) * 110>
                                     <div class="flex flex-col gap-4">
                                         // 圖片維持各自原始比例，不裁切、不強制統一比例，三欄頂部對齊
                                         // （spec.md 4.1⑤ v9 圖片顯示規則）
