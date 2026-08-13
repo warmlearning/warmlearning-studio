@@ -17,6 +17,21 @@ struct Stage {
     outcome: &'static str,
 }
 
+const CYCLE_STEPS: [&str; 5] = ["了解狀況", "課堂學習", "課後練習與陪跑", "回顧與調整", "找到下一步"];
+
+struct LearningFeatureCard {
+    title: &'static str,
+    body: &'static str,
+}
+
+const LEARNING_FEATURE_CARDS: [LearningFeatureCard; 5] = [
+    LearningFeatureCard { title: "學習導航", body: "知道「我現在在哪裡、下一步做什麼」。" },
+    LearningFeatureCard { title: "陪跑回顧", body: "讓學習不只發生在每週的一堂課。" },
+    LearningFeatureCard { title: "學習方法", body: "學會複習、整理、安排與自我檢查。" },
+    LearningFeatureCard { title: "AI 學習力", body: "學會利用工具幫助思考，而不是依賴答案。" },
+    LearningFeatureCard { title: "家庭共育", body: "讓家長知道怎麼陪，而不是只能每天催。" },
+];
+
 const STAGES: [Stage; 3] = [
     Stage {
         emoji: "🌱",
@@ -64,7 +79,7 @@ pub fn CoursesPage() -> impl IntoView {
 
         <PageHeader/>
         <TimelineSection/>
-        <AddonSection/>
+        <LearningCycleSection/>
         <FooterCtaSection/>
     }
 }
@@ -165,40 +180,93 @@ fn TimelineSection() -> impl IntoView {
     }
 }
 
+/// 「知暖的課程，不只是在上課的那一段時間」區塊，取代原「學習加值方案」區塊
+/// （spec.md 4.3③，v12 全面改版）
 #[component]
-fn AddonSection() -> impl IntoView {
+fn LearningCycleSection() -> impl IntoView {
     view! {
         <section class="bg-mist-blue">
             <Reveal class="mx-auto max-w-5xl px-6 py-16 lg:py-24".to_string()>
-                <h2 class="text-center text-3xl font-bold text-brand-blue">"學習加值方案"</h2>
-                <div class="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
-                    <Reveal delay_ms=0u32>
-                        <Card class="relative p-6".to_string()>
-                            <span class="absolute right-6 top-6 rounded-md bg-warm-amber px-3 py-1 text-xs font-medium text-ink">
-                                "推薦"
-                            </span>
-                            <h3 class="text-xl font-bold text-ink">"🌿 陪跑續航"</h3>
-                            <p class="mt-2 text-sm text-slate-gray">"適合對象：需要持續陪伴、養成學習習慣的學生"</p>
-                            <p class="mt-2 text-sm leading-[1.7] text-slate-gray">
-                                "每週學習任務指派、課後訊息追蹤與答疑、自學力與讀書習慣技法養成"
-                            </p>
-                        </Card>
-                    </Reveal>
+                <h2 class="text-center text-3xl font-bold text-brand-blue">
+                    "知暖的課程，不只是在上課的那一段時間"
+                </h2>
+                <p class="mx-auto mt-4 max-w-3xl text-center text-sm leading-[1.7] text-slate-gray">
+                    "我們把學習拆成一套孩子可以逐漸接手的流程，讓他知道怎麼開始、怎麼練習，也知道怎麼回頭看自己的進步。"
+                </p>
 
-                    <Reveal delay_ms=110u32>
-                        <Card class="p-6".to_string()>
-                            <h3 class="text-xl font-bold text-ink">"🏆 檢定／升學加購"</h3>
-                            <p class="mt-2 text-sm text-slate-gray">
-                                "適合對象：有明確檢定或升學目標的學生（GEPT、全民英檢、會考、學測等）"
-                            </p>
-                            <p class="mt-2 text-sm leading-[1.7] text-slate-gray">
-                                "客製學習計畫、模考分析、考前衝刺、弱點分析"
-                            </p>
-                        </Card>
-                    </Reveal>
+                // 循環式流程靜態版面，動畫留待之後跟 Learning Journey 時間軸一起處理（spec.md 4.3③ 動畫備註）
+                <div class="mt-12 flex flex-col items-center gap-3 lg:flex-row lg:justify-center lg:gap-4">
+                    {CYCLE_STEPS
+                        .iter()
+                        .enumerate()
+                        .map(|(i, step)| {
+                            view! {
+                                <div class="rounded-full bg-white px-5 py-3 text-center text-sm font-bold text-brand-blue shadow-md lg:text-base">
+                                    {*step}
+                                </div>
+                                {(i < CYCLE_STEPS.len() - 1)
+                                    .then(|| {
+                                        view! {
+                                            <span aria-hidden="true" class="text-xl font-bold text-sky-blue lg:hidden">
+                                                "↓"
+                                            </span>
+                                            <span aria-hidden="true" class="hidden text-xl font-bold text-sky-blue lg:inline">
+                                                "→"
+                                            </span>
+                                        }
+                                    })}
+                            }
+                        })
+                        .collect_view()}
+                </div>
+                <p class="mt-4 flex items-center justify-center gap-2 text-sm text-slate-gray">
+                    <span aria-hidden="true" class="text-lg text-sky-blue">
+                        "↻"
+                    </span>
+                    "回到下一個學習循環"
+                </p>
+
+                <div class="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5">
+                    {LEARNING_FEATURE_CARDS
+                        .iter()
+                        .enumerate()
+                        .map(|(i, card)| {
+                            view! {
+                                <Reveal delay_ms=(i as u32) * 110>
+                                    <Card class="p-6".to_string()>
+                                        <h3 class="text-lg font-bold text-ink">{card.title}</h3>
+                                        <p class="mt-2 text-sm leading-[1.7] text-slate-gray">{card.body}</p>
+                                    </Card>
+                                </Reveal>
+                            }
+                        })
+                        .collect_view()}
                 </div>
 
-                <div class="mt-10 flex flex-col items-center gap-4 text-center">
+                // AI 融入教學說明文字＋插圖＋貼紙標語，v12 從關於知暖頁移入本區塊，
+                // 放在「AI 學習力」卡片附近作延伸說明（spec.md 4.3③）
+                <div class="mt-16 flex flex-col items-center gap-10 lg:flex-row">
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-brand-blue">"AI 融入教學"</h3>
+                        <p class="mt-4 text-base leading-[1.7] text-ink">
+                            "AI 正在改變學習方式，而知暖希望帶領學生學會善用 AI，而不是依賴 AI。我們將 AI 工具融入英文學習，引導學生練習口說、寫作、閱讀理解、情境對話與自主複習，提升學習效率與思考能力。課程更重視如何正確提問、整理資訊及培養自主學習策略，讓科技成為學習的助力，而不是答案的替代品，幫助學生建立未來不可或缺的英語與 AI 素養。"
+                        </p>
+                    </div>
+
+                    <div class="relative mx-auto w-full max-w-xs flex-shrink-0 sm:max-w-sm">
+                        <img
+                            src="/img/illustration-ai-feature.png"
+                            alt="AI 輔助學習插圖：機器人與 ABC 字母"
+                            class="w-full"
+                        />
+                        // 全站唯一活潑俏皮語氣的貼紙標語，刻意獨立於周圍文案語氣之外，範圍僅限這個小標籤
+                        <span class="absolute -right-2 -top-2 inline-block max-w-[9rem] -rotate-6 rounded-2xl bg-warm-amber px-3 py-1.5 text-center text-xs font-bold leading-tight text-ink shadow-md sm:-right-4 sm:-top-4">
+                            "讓你從英文廢柴變成英文小天才🔥"
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mt-16 flex flex-col items-center gap-4 text-center">
                     <p class="text-sm text-slate-gray">"詳細方案請加入 LINE 諮詢"</p>
                     <CtaButton href=LINE_URL label="加入 LINE 諮詢" variant=ButtonVariant::Line/>
                 </div>
