@@ -12,10 +12,22 @@ struct FeatureCard {
 }
 
 const FEATURE_CARDS: [FeatureCard; 4] = [
-    FeatureCard { title: "溫暖陪伴", body: "我們相信陪伴的力量，用心理解每位學生，陪你一步步前進。" },
-    FeatureCard { title: "客製化教學", body: "依照學生程度與目標，量身打造專屬學習計畫，學習更有效率。" },
-    FeatureCard { title: "AI 輔助學習", body: "結合 AI 工具與數位資源，讓學習更有趣、更貼近未來趨勢。" },
-    FeatureCard { title: "建立自主學習", body: "培養學習策略與思維，讓孩子擁有帶得走的能力，受用一生。" },
+    FeatureCard {
+        title: "讓孩子理解自己",
+        body: "不是直接套進固定進度，而是先了解程度、學習習慣與卡關的位置，再安排適合的學習方式。",
+    },
+    FeatureCard {
+        title: "維持學習溫度",
+        body: "把一週的一堂課延伸到日常練習、回顧與調整，讓學習不會下課就結束。",
+    },
+    FeatureCard {
+        title: "總結與回顧",
+        body: "不只訂正答案，也陪孩子理解「我哪裡不會、為什麼不會、下一步可以怎麼做」。",
+    },
+    FeatureCard {
+        title: "善用 AI 工具",
+        body: "教孩子運用 AI 整理、練習、提問與檢查，讓工具幫助思考，而不是取代思考。",
+    },
 ];
 
 struct CourseCard {
@@ -39,10 +51,10 @@ struct FlowStep {
 
 const FLOW_STEPS: [FlowStep; 5] = [
     FlowStep { title: "① 預約諮詢", body: "了解學習需求與目標，提供最適合的課程建議。" },
-    FlowStep { title: "② 能力評估", body: "透過專業評估，掌握學生目前程度與學習關鍵。" },
-    FlowStep { title: "③ 安排試聽", body: "實際體驗課程，找到最適合的學習方式與節奏。" },
-    FlowStep { title: "④ 正式課程", body: "依照個人程度規劃內容，循序建立英文能力與學習習慣。" },
-    FlowStep { title: "⑤ 成果追蹤", body: "持續檢視學習成果，調整教學策略，陪伴孩子穩定成長。" },
+    FlowStep { title: "② 學習評估", body: "透過專業評估，掌握學生目前程度與學習關鍵。" },
+    FlowStep { title: "③ 開始學習", body: "依照個人程度規劃內容，循序建立英文能力與學習習慣。" },
+    FlowStep { title: "④ 學習追蹤", body: "持續檢視學習成果，調整教學策略，陪伴孩子穩定成長。" },
+    FlowStep { title: "⑤ 維持續航", body: "建立長期穩定的學習節奏，讓學習成為持續的習慣，而不是一次性的衝刺。" },
 ];
 
 struct StudentResult {
@@ -53,23 +65,24 @@ struct StudentResult {
 }
 
 // 內文已去識別化處理，不含真實姓名；健康相關描述一律用中性、非診斷性說法呈現，
-// 不點名任何醫療診斷或治療狀態（spec.md 4.1⑤ 隱私處理備註，v9 更新）
+// 不點名任何醫療診斷或治療狀態（spec.md 4.1⑤ 隱私處理備註）。標題句為 v12 更新，
+// 敘事與重點句沿用原文不變。
 const STUDENT_RESULTS: [StudentResult; 3] = [
     StudentResult {
         image: "/img/result-1.jpg",
-        title: "①「英文程度落後，但重新找回學習信心」的孩子",
+        title: "從「英文跟不上」到重新願意學",
         narrative: "原本專注力較不集中、對英文沒有信心的孩子，透過重新建立基礎與學習方法，逐漸找到與英文學習的連結點，也開始相信自己做得到。",
         highlight: "👉 知暖不是只教英文，而是找回孩子的學習信心。",
     },
     StudentResult {
         image: "/img/result-2.jpg",
-        title: "②「成績不一定最差，但缺乏學習習慣」的孩子",
+        title: "從「每天都要催」到開始知道自己該做什麼",
         narrative: "原本需要家長不斷提醒、缺乏自主學習習慣的孩子，透過陪跑與學習方法建立，慢慢從「被要求學」轉變成「知道自己該怎麼學」。每日練習總結、逐步修正，誠實了解自己的狀況與清晰目標，調整出最適合自己的讀書節奏，運用天賦、擅長處來幫上學習大忙——不再帶著罪惡感休息，能更有效善用時間，玩樂休息取得平衡，相信自己是優秀的。",
         highlight: "👉 從英文學習延伸到自主學習。",
     },
     StudentResult {
         image: "/img/result-3.jpg",
-        title: "③「願意和老師一起成長的家庭」",
+        title: "從「家長很焦慮」到親師一起找到陪伴方法",
         narrative: "家長願意與老師合作，不只關注孩子的成績，也願意一起調整陪伴方式，最後讓親子關係與孩子的學習狀態都逐漸變得更穩定。",
         highlight: "👉 知暖服務的不只是孩子，而是一個家庭。",
     },
@@ -102,14 +115,15 @@ fn HeroSection() -> impl IntoView {
                 <div class="flex flex-1 flex-col items-start gap-5 text-left">
                     <p class="font-handwriting text-lg text-sky-blue">"♡ 知足上進，溫暖而堅定"</p>
                     <h1 class="text-4xl font-bold leading-[1.3] text-brand-blue lg:text-5xl">
-                        "讓孩子不只是學英文，而是學會學習"
+                        "從英文開始，" <br/> "陪孩子建立走得長久的學習力。"
                     </h1>
                     <p class="text-base leading-[1.7] text-slate-gray">
-                        "知暖學習陪伴每位孩子建立英文能力、自主學習習慣與未來競爭力。"
+                        "把學習從課堂延伸到日常，知暖學習陪伴孩子建立屬於自己的自主學習習慣。" <br/>
+                        "把英文學好，也把「會學習」的能力一起帶走。"
                     </p>
                     <div class="flex flex-wrap gap-4 pt-2">
-                        <CtaButton href="/contact" label="預約諮詢" variant=ButtonVariant::Primary/>
-                        <CtaButton href="/courses" label="了解課程" variant=ButtonVariant::Secondary/>
+                        <CtaButton href="/contact" label="預約學習諮詢" variant=ButtonVariant::Primary/>
+                        <CtaButton href="/courses" label="了解學習路徑" variant=ButtonVariant::Secondary/>
                     </div>
                 </div>
 
@@ -138,7 +152,7 @@ fn WhyChooseSection() -> impl IntoView {
             <div class="mx-auto max-w-7xl px-6 py-16 lg:py-24">
                 <h2 class="flex items-center justify-center gap-3 text-center text-3xl font-bold text-brand-blue">
                     <span class="text-pale-blue">"—"</span>
-                    "為什麼選擇知暖？"
+                    "知暖如何引導孩子學習"
                     <span class="text-pale-blue">"—"</span>
                 </h2>
 
@@ -182,7 +196,10 @@ fn CoursesSection() -> impl IntoView {
     view! {
         <section class="bg-mist-blue">
             <div class="mx-auto max-w-7xl px-6 py-16 lg:py-24">
-                <h2 class="text-center text-3xl font-bold text-brand-blue">"我們提供多元課程"</h2>
+                <h2 class="text-center text-3xl font-bold text-brand-blue">"每個階段，都有適合的學習道路"</h2>
+                <p class="mx-auto mt-4 max-w-3xl text-center text-sm leading-[1.7] text-slate-gray">
+                    "從親子共學、國小建立基礎、國中發展能力、高中升學突破，到成人實用英文，依照不同階段找到真正需要的下一步。"
+                </p>
 
                 <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5">
                     {COURSE_CARDS
@@ -224,7 +241,10 @@ fn LearningFlowSection() -> impl IntoView {
     view! {
         <section class="bg-white">
             <div class="mx-auto max-w-7xl px-6 py-16 lg:py-24">
-                <h2 class="text-center text-3xl font-bold text-brand-blue">"如何加入知暖？"</h2>
+                <h2 class="text-center text-3xl font-bold text-brand-blue">"從這裡開始你的學習旅程"</h2>
+                <p class="mx-auto mt-4 max-w-3xl text-center text-sm leading-[1.7] text-slate-gray">
+                    "不需要先知道該選哪堂課，我們會先了解目前的學習狀況，再一起找到適合的方向。"
+                </p>
 
                 <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5">
                     {FLOW_STEPS
@@ -254,27 +274,35 @@ fn ResultsSection() -> impl IntoView {
             <div class="mx-auto max-w-7xl px-6 py-16 lg:py-24">
                 <h2 class="text-center text-3xl font-bold text-brand-blue">"學生成果與家長好評"</h2>
 
-                <div class="mt-10 grid grid-cols-1 items-start gap-10 lg:grid-cols-3 lg:gap-8">
+                <div class="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-3">
                     {STUDENT_RESULTS
                         .iter()
                         .enumerate()
                         .map(|(i, result)| {
                             view! {
                                 <Reveal delay_ms=(i as u32) * 110>
-                                    <div class="flex flex-col gap-4">
-                                        // 圖片維持各自原始比例，不裁切、不強制統一比例，三欄頂部對齊
-                                        // （spec.md 4.1⑤ v9 圖片顯示規則）
-                                        <img
-                                            src=result.image
-                                            alt=result.title
-                                            class="h-auto w-full max-w-xs mx-auto rounded-2xl lg:max-w-none"
-                                        />
-                                        <div class="flex flex-col gap-2">
-                                            <h3 class="text-base font-bold text-brand-blue">{result.title}</h3>
-                                            <p class="text-sm leading-[1.7] text-slate-gray">{result.narrative}</p>
-                                            <p class="text-sm font-medium text-brand-blue">{result.highlight}</p>
+                                    // v12 版面改版：大字標題句在上方吸引注意，原本主視覺用的截圖
+                                    // 縮小成旁邊的縮圖佐證，不再是版面主視覺（spec.md 4.1⑤）
+                                    <Card class="flex h-full flex-col gap-4 p-6".to_string()>
+                                        <h3 class="text-xl font-bold leading-snug text-brand-blue">
+                                            {result.title}
+                                        </h3>
+                                        <div class="flex flex-1 flex-col gap-4 sm:flex-row sm:items-start">
+                                            <img
+                                                src=result.image
+                                                alt=result.title
+                                                class="h-24 w-24 flex-shrink-0 rounded-xl object-cover"
+                                            />
+                                            <div class="flex flex-col gap-2">
+                                                <p class="text-sm leading-[1.7] text-slate-gray">
+                                                    {result.narrative}
+                                                </p>
+                                                <p class="text-sm font-medium text-brand-blue">
+                                                    {result.highlight}
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </Card>
                                 </Reveal>
                             }
                         })
@@ -321,8 +349,8 @@ fn CtaSection() -> impl IntoView {
                     </p>
                 </div>
                 <div class="flex flex-shrink-0 flex-wrap justify-center gap-4">
-                    <CtaButton href="/contact" label="預約諮詢" variant=ButtonVariant::Primary/>
-                    <CtaButton href=LINE_URL label="加入 LINE 諮詢" variant=ButtonVariant::Line/>
+                    <CtaButton href="/contact" label="預約學習諮詢" variant=ButtonVariant::Primary/>
+                    <CtaButton href=LINE_URL label="LINE 詢問" variant=ButtonVariant::Line/>
                 </div>
             </Reveal>
         </section>
