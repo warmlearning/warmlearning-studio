@@ -281,7 +281,7 @@ fn FooterCtaSection() -> impl IntoView {
         <section class="bg-mist-blue">
             <Reveal class="mx-auto flex max-w-3xl flex-col items-center gap-4 px-6 py-16 text-center lg:py-24".to_string()>
                 <p class="text-lg text-ink">"想更了解適合孩子的方案？"</p>
-                <CtaButton href=LINE_URL label="加入 LINE 諮詢，了解適合方案" variant=ButtonVariant::Line/>
+                <CtaButton href=LINE_URL label="LINE 詢問" variant=ButtonVariant::Line/>
             </Reveal>
         </section>
     }
