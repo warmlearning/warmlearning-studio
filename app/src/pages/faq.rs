@@ -28,9 +28,11 @@ const ANSWERED_FAQS: [AnsweredFaq; 3] = [
 const PENDING_QUESTIONS: [&str; 5] =
     ["需要程度很好嗎？", "可以試聽嗎？", "多久看到成果？", "有線上課嗎？", "教材是什麼？"];
 
-/// 常見問題頁，對照 spec.md 4.7 節（v7 新增）
+/// 常見問題頁，對照 spec.md 4.7 節（v7 新增，v12 頁尾 CTA 改版）
 #[component]
 pub fn FaqPage() -> impl IntoView {
+    let show_options = RwSignal::new(false);
+
     view! {
         <Title text="常見問題 FAQ｜知暖 Warm Learning Studio"/>
         <Meta
@@ -75,8 +77,28 @@ pub fn FaqPage() -> impl IntoView {
                         .collect_view()}
                 </div>
 
-                <div class="mt-12 flex justify-center">
-                    <CtaButton href=LINE_URL label="還有其他問題？加入 LINE 諮詢" variant=ButtonVariant::Line/>
+                <div class="mt-12 flex flex-col items-center gap-4">
+                    // 頁尾 CTA 改版：點擊後展開兩個選項按鈕，屬於點擊微互動，
+                    // 依 spec.md 5.8 節暫緩實作清單不加動畫效果（純即時切換顯示）
+                    <Show
+                        when=move || show_options.get()
+                        fallback=move || {
+                            view! {
+                                <button
+                                    type="button"
+                                    on:click=move |_| show_options.set(true)
+                                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-line-green px-8 py-3 font-medium text-white transition-all duration-200 hover:brightness-95"
+                                >
+                                    "還有其他問題？"
+                                </button>
+                            }
+                        }
+                    >
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <CtaButton href=LINE_URL label="預約學習諮詢" variant=ButtonVariant::Line/>
+                            <CtaButton href="/courses" label="了解學習路徑" variant=ButtonVariant::Secondary/>
+                        </div>
+                    </Show>
                 </div>
             </Reveal>
         </section>
