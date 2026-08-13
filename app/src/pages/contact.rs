@@ -4,7 +4,7 @@ use leptos_meta::{Meta, Title};
 
 use crate::admin_auth::friendly_error_message;
 use crate::components::icons::{ChatIcon, FacebookIcon, InstagramIcon};
-use crate::components::Reveal;
+use crate::components::{FadeIn, Reveal};
 
 const LINE_URL: &str = "https://line.me/R/ti/p/@891ivojl";
 
@@ -162,17 +162,19 @@ pub fn ContactPage() -> impl IntoView {
                         {move || match response.get() {
                             Some(Ok(())) => {
                                 view! {
-                                    <p class="rounded-xl bg-mist-blue px-4 py-3 text-sm text-success-green">
+                                    <FadeIn class="rounded-xl bg-mist-blue px-4 py-3 text-sm text-success-green"
+                                        .to_string()>
                                         "送出成功，我們會盡快與您聯繫"
-                                    </p>
+                                    </FadeIn>
                                 }
                                     .into_any()
                             }
                             Some(Err(e)) => {
                                 view! {
-                                    <p class="rounded-xl bg-mist-blue px-4 py-3 text-sm text-error-red">
+                                    <FadeIn class="rounded-xl bg-mist-blue px-4 py-3 text-sm text-error-red"
+                                        .to_string()>
                                         {friendly_error_message(&e)}
-                                    </p>
+                                    </FadeIn>
                                 }
                                     .into_any()
                             }

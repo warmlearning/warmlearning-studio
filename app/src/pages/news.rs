@@ -3,7 +3,25 @@ use leptos_meta::{Meta, Title};
 use leptos_router::hooks::{use_params_map, use_query_map};
 
 use crate::admin_auth::friendly_error_message;
-use crate::components::{Card, Reveal};
+use crate::components::{Card, FadeIn, Reveal};
+
+const SKELETON_CARD_COUNT: usize = 6;
+
+/// 最新消息列表載入中的骨架屏卡片，對照 spec.md 5.8 節第 2 項
+#[component]
+fn NewsCardSkeleton() -> impl IntoView {
+    view! {
+        <div class="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-md">
+            <div class="aspect-[4/3] w-full animate-pulse bg-pale-blue"></div>
+            <div class="flex flex-1 flex-col gap-3 p-5">
+                <div class="h-3 w-16 animate-pulse rounded bg-pale-blue"></div>
+                <div class="h-5 w-3/4 animate-pulse rounded bg-pale-blue"></div>
+                <div class="h-3 w-full animate-pulse rounded bg-pale-blue"></div>
+                <div class="h-3 w-5/6 animate-pulse rounded bg-pale-blue"></div>
+            </div>
+        </div>
+    }
+}
 
 #[cfg(feature = "ssr")]
 const PAGE_SIZE: i64 = 9;
@@ -146,7 +164,13 @@ pub fn NewsListPage() -> impl IntoView {
             <div class="mx-auto max-w-7xl px-6 py-16 lg:py-24">
                 <h1 class="text-center text-3xl font-bold text-brand-blue">"最新消息"</h1>
 
-                <Suspense fallback=move || view! { <p class="mt-12 text-center text-slate-gray">"載入中…"</p> }>
+                <Suspense fallback=move || {
+                    view! {
+                        <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                            {(0..SKELETON_CARD_COUNT).map(|_| view! { <NewsCardSkeleton/> }).collect_view()}
+                        </div>
+                    }
+                }>
                     {move || {
                         announcements
                             .get()
@@ -159,7 +183,8 @@ pub fn NewsListPage() -> impl IntoView {
                                 }
                                 Ok(AnnouncementListPage { items, page, total_pages }) => {
                                     view! {
-                                        <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                                        <FadeIn class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+                                            .to_string()>
                                             {items
                                                 .into_iter()
                                                 .map(|item| {
@@ -194,7 +219,7 @@ pub fn NewsListPage() -> impl IntoView {
                                                     }
                                                 })
                                                 .collect_view()}
-                                        </div>
+                                        </FadeIn>
 
                                         <div class="mt-12 flex items-center justify-center gap-6">
                                             {(page > 1)
