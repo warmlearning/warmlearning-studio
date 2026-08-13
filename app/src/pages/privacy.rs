@@ -1,6 +1,8 @@
 use leptos::prelude::*;
 use leptos_meta::{Meta, Title};
 
+use crate::components::Reveal;
+
 #[component]
 pub fn PrivacyPage() -> impl IntoView {
     view! {
@@ -8,7 +10,7 @@ pub fn PrivacyPage() -> impl IntoView {
         <Meta name="robots" content="noindex"/>
 
         <section class="bg-white">
-            <div class="mx-auto max-w-3xl px-6 py-16 lg:py-24">
+            <Reveal class="mx-auto max-w-3xl px-6 py-16 lg:py-24".to_string()>
                 <h1 class="text-center text-3xl font-bold text-brand-blue">"隱私權政策與服務條款"</h1>
 
                 <nav class="mt-8 flex justify-center gap-6 text-sm">
@@ -106,7 +108,7 @@ pub fn PrivacyPage() -> impl IntoView {
                         <p class="mt-4 text-slate-gray">"最後更新日期：待填寫（正式上線日期）"</p>
                     </div>
                 </article>
-            </div>
+            </Reveal>
         </section>
     }
 }
