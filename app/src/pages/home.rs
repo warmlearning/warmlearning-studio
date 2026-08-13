@@ -2,7 +2,7 @@ use leptos::prelude::*;
 use leptos_meta::{Meta, Title};
 
 use crate::components::icons::{AiIcon, CalendarIcon, HeartIcon, PersonIcon, TrendUpIcon};
-use crate::components::{ButtonVariant, Card, CtaButton, ImagePlaceholder};
+use crate::components::{ButtonVariant, Card, CtaButton, ImagePlaceholder, Reveal};
 
 const LINE_URL: &str = "https://line.me/R/ti/p/@891ivojl";
 
@@ -148,24 +148,26 @@ fn WhyChooseSection() -> impl IntoView {
                         .enumerate()
                         .map(|(i, card)| {
                             view! {
-                                <div class="flex flex-col items-center gap-3 text-center">
-                                    <div class="flex h-16 w-16 items-center justify-center rounded-full bg-pale-blue text-brand-blue">
-                                        {match i {
-                                            0 => view! { <HeartIcon/> }.into_any(),
-                                            1 => view! { <PersonIcon/> }.into_any(),
-                                            2 => view! { <AiIcon/> }.into_any(),
-                                            _ => view! { <TrendUpIcon/> }.into_any(),
-                                        }}
+                                <Reveal delay_ms=(i as u32) * 110>
+                                    <div class="flex flex-col items-center gap-3 text-center">
+                                        <div class="flex h-16 w-16 items-center justify-center rounded-full bg-pale-blue text-brand-blue">
+                                            {match i {
+                                                0 => view! { <HeartIcon/> }.into_any(),
+                                                1 => view! { <PersonIcon/> }.into_any(),
+                                                2 => view! { <AiIcon/> }.into_any(),
+                                                _ => view! { <TrendUpIcon/> }.into_any(),
+                                            }}
+                                        </div>
+                                        <h3 class="text-xl font-bold text-ink">{card.title}</h3>
+                                        <p class="text-sm leading-[1.7] text-slate-gray">{card.body}</p>
+                                        <a
+                                            href="/about#long-term-learning"
+                                            class="text-sm font-medium text-brand-blue hover:underline"
+                                        >
+                                            "了解更多"
+                                        </a>
                                     </div>
-                                    <h3 class="text-xl font-bold text-ink">{card.title}</h3>
-                                    <p class="text-sm leading-[1.7] text-slate-gray">{card.body}</p>
-                                    <a
-                                        href="/about#long-term-learning"
-                                        class="text-sm font-medium text-brand-blue hover:underline"
-                                    >
-                                        "了解更多"
-                                    </a>
-                                </div>
+                                </Reveal>
                             }
                         })
                         .collect_view()}
@@ -185,26 +187,29 @@ fn CoursesSection() -> impl IntoView {
                 <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5">
                     {COURSE_CARDS
                         .iter()
-                        .map(|course| {
+                        .enumerate()
+                        .map(|(i, course)| {
                             view! {
-                                <Card class="overflow-hidden flex flex-col".to_string()>
-                                    // TODO: 課程情境照片待整理歸類（見 docs/asset-list.md「課程情境照片」）
-                                    <ImagePlaceholder
-                                        label="課程情境照片準備中"
-                                        class="aspect-[4/3] w-full rounded-t-2xl"
-                                    />
-                                    <div class="flex flex-1 flex-col gap-2 p-5">
-                                        <h3 class="text-xl font-bold text-ink">{course.title}</h3>
-                                        <p class="flex-1 text-sm leading-[1.7] text-slate-gray">{course.intro}</p>
-                                        <a
-                                            href=format!("/courses{}", course.anchor)
-                                            class="group inline-flex items-center gap-1 text-sm font-medium text-brand-blue"
-                                        >
-                                            "了解更多"
-                                            <span class="transition-transform group-hover:translate-x-1">"→"</span>
-                                        </a>
-                                    </div>
-                                </Card>
+                                <Reveal delay_ms=(i as u32) * 110>
+                                    <Card class="overflow-hidden flex flex-col".to_string()>
+                                        // TODO: 課程情境照片待整理歸類（見 docs/asset-list.md「課程情境照片」）
+                                        <ImagePlaceholder
+                                            label="課程情境照片準備中"
+                                            class="aspect-[4/3] w-full rounded-t-2xl"
+                                        />
+                                        <div class="flex flex-1 flex-col gap-2 p-5">
+                                            <h3 class="text-xl font-bold text-ink">{course.title}</h3>
+                                            <p class="flex-1 text-sm leading-[1.7] text-slate-gray">{course.intro}</p>
+                                            <a
+                                                href=format!("/courses{}", course.anchor)
+                                                class="group inline-flex items-center gap-1 text-sm font-medium text-brand-blue"
+                                            >
+                                                "了解更多"
+                                                <span class="transition-transform group-hover:translate-x-1">"→"</span>
+                                            </a>
+                                        </div>
+                                    </Card>
+                                </Reveal>
                             }
                         })
                         .collect_view()}
@@ -224,12 +229,15 @@ fn LearningFlowSection() -> impl IntoView {
                 <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5">
                     {FLOW_STEPS
                         .iter()
-                        .map(|step| {
+                        .enumerate()
+                        .map(|(i, step)| {
                             view! {
-                                <div class="flex flex-col items-center gap-2 text-center">
-                                    <h3 class="text-lg font-bold text-brand-blue">{step.title}</h3>
-                                    <p class="text-sm leading-[1.7] text-slate-gray">{step.body}</p>
-                                </div>
+                                <Reveal delay_ms=(i as u32) * 110>
+                                    <div class="flex flex-col items-center gap-2 text-center">
+                                        <h3 class="text-lg font-bold text-brand-blue">{step.title}</h3>
+                                        <p class="text-sm leading-[1.7] text-slate-gray">{step.body}</p>
+                                    </div>
+                                </Reveal>
                             }
                         })
                         .collect_view()}
@@ -249,22 +257,25 @@ fn ResultsSection() -> impl IntoView {
                 <div class="mt-10 grid grid-cols-1 items-start gap-10 lg:grid-cols-3 lg:gap-8">
                     {STUDENT_RESULTS
                         .iter()
-                        .map(|result| {
+                        .enumerate()
+                        .map(|(i, result)| {
                             view! {
-                                <div class="flex flex-col gap-4">
-                                    // 圖片維持各自原始比例，不裁切、不強制統一比例，三欄頂部對齊
-                                    // （spec.md 4.1⑤ v9 圖片顯示規則）
-                                    <img
-                                        src=result.image
-                                        alt=result.title
-                                        class="h-auto w-full max-w-xs mx-auto rounded-2xl lg:max-w-none"
-                                    />
-                                    <div class="flex flex-col gap-2">
-                                        <h3 class="text-base font-bold text-brand-blue">{result.title}</h3>
-                                        <p class="text-sm leading-[1.7] text-slate-gray">{result.narrative}</p>
-                                        <p class="text-sm font-medium text-brand-blue">{result.highlight}</p>
+                                <Reveal delay_ms=(i as u32) * 110>
+                                    <div class="flex flex-col gap-4">
+                                        // 圖片維持各自原始比例，不裁切、不強制統一比例，三欄頂部對齊
+                                        // （spec.md 4.1⑤ v9 圖片顯示規則）
+                                        <img
+                                            src=result.image
+                                            alt=result.title
+                                            class="h-auto w-full max-w-xs mx-auto rounded-2xl lg:max-w-none"
+                                        />
+                                        <div class="flex flex-col gap-2">
+                                            <h3 class="text-base font-bold text-brand-blue">{result.title}</h3>
+                                            <p class="text-sm leading-[1.7] text-slate-gray">{result.narrative}</p>
+                                            <p class="text-sm font-medium text-brand-blue">{result.highlight}</p>
+                                        </div>
                                     </div>
-                                </div>
+                                </Reveal>
                             }
                         })
                         .collect_view()}
@@ -278,7 +289,7 @@ fn ResultsSection() -> impl IntoView {
 fn FounderSection() -> impl IntoView {
     view! {
         <section class="bg-white">
-            <div class="mx-auto flex max-w-7xl flex-col items-center gap-10 px-6 py-16 lg:flex-row lg:py-24">
+            <Reveal class="mx-auto flex max-w-7xl flex-col items-center gap-10 px-6 py-16 lg:flex-row lg:py-24".to_string()>
                 <div class="flex-1 text-center lg:order-2 lg:text-left">
                     <blockquote class="text-xl font-medium leading-[1.7] text-ink">
                         "Hi，我是 Penny。我相信，每個孩子都能找到適合自己的學習方式。我們教的不只是英文，而是一輩子的學習能力。"
@@ -291,7 +302,7 @@ fn FounderSection() -> impl IntoView {
                     alt="創辦人 Penny"
                     class="aspect-square w-full max-w-xs rounded-2xl object-cover flex-shrink-0 lg:order-1"
                 />
-            </div>
+            </Reveal>
         </section>
     }
 }
@@ -300,7 +311,7 @@ fn FounderSection() -> impl IntoView {
 fn CtaSection() -> impl IntoView {
     view! {
         <section class="bg-mist-blue">
-            <div class="mx-auto flex max-w-7xl flex-col items-center gap-8 px-6 py-16 lg:flex-row lg:justify-between lg:py-24">
+            <Reveal class="mx-auto flex max-w-7xl flex-col items-center gap-8 px-6 py-16 lg:flex-row lg:justify-between lg:py-24".to_string()>
                 <div class="flex items-center gap-4 text-center lg:text-left">
                     <div class="hidden h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-brand-blue text-white sm:flex">
                         <CalendarIcon/>
@@ -313,7 +324,7 @@ fn CtaSection() -> impl IntoView {
                     <CtaButton href="/contact" label="預約諮詢" variant=ButtonVariant::Primary/>
                     <CtaButton href=LINE_URL label="加入 LINE 諮詢" variant=ButtonVariant::Line/>
                 </div>
-            </div>
+            </Reveal>
         </section>
     }
 }

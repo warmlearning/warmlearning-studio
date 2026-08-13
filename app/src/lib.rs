@@ -10,8 +10,9 @@ use leptos_router::{
 pub mod admin_auth;
 pub mod pages;
 pub mod components;
+pub mod scroll_reveal;
 
-use components::{Footer, Navbar};
+use components::{FloatingLineButton, Footer, Navbar};
 use pages::about::AboutPage;
 use pages::admin_announcement_form::AdminAnnouncementFormPage;
 use pages::admin_announcements::AdminAnnouncementsListPage;
@@ -95,6 +96,9 @@ fn AppShell() -> impl IntoView {
         </main>
         <Show when=move || !is_admin()>
             <Footer/>
+        </Show>
+        <Show when=move || !is_admin()>
+            <FloatingLineButton/>
         </Show>
     }
 }

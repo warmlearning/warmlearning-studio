@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 use leptos_meta::{Meta, Title};
 
-use crate::components::Card;
+use crate::components::{Card, Reveal};
 
 struct Keyword {
     title: &'static str,
@@ -44,7 +44,7 @@ pub fn AboutPage() -> impl IntoView {
 fn BrandStorySection() -> impl IntoView {
     view! {
         <section class="bg-mist-blue">
-            <div class="mx-auto max-w-4xl px-6 py-16 lg:py-24">
+            <Reveal class="mx-auto max-w-4xl px-6 py-16 lg:py-24".to_string()>
                 <h1 class="text-center text-3xl font-bold text-brand-blue">"為什麼創立知暖？"</h1>
 
                 <div class="mt-8 flex flex-col gap-5 text-base leading-[1.7] text-ink">
@@ -76,7 +76,7 @@ fn BrandStorySection() -> impl IntoView {
                 <p class="mt-12 text-center text-xl font-medium text-brand-blue">
                     "我們相信，不是教出高分，而是教出會學習的人。"
                 </p>
-            </div>
+            </Reveal>
         </section>
     }
 }
@@ -86,14 +86,14 @@ fn BrandStorySection() -> impl IntoView {
 fn LongTermLearningSection() -> impl IntoView {
     view! {
         <section id="long-term-learning" class="scroll-mt-24 bg-white">
-            <div class="mx-auto max-w-3xl px-6 py-16 lg:py-24">
+            <Reveal class="mx-auto max-w-3xl px-6 py-16 lg:py-24".to_string()>
                 <h2 class="text-center text-3xl font-bold text-brand-blue">
                     "先「勝」後「戰」・長期主義學習"
                 </h2>
                 <div class="mt-8 flex flex-col gap-5 text-base leading-[1.7] text-ink">
                     {LONG_TERM_PARAGRAPHS.iter().map(|p| view! { <p>{*p}</p> }).collect_view()}
                 </div>
-            </div>
+            </Reveal>
         </section>
     }
 }
@@ -103,7 +103,7 @@ fn LongTermLearningSection() -> impl IntoView {
 fn AiFeatureSection() -> impl IntoView {
     view! {
         <section class="bg-mist-blue">
-            <div class="mx-auto flex max-w-7xl flex-col items-center gap-10 px-6 py-16 lg:flex-row lg:py-24">
+            <Reveal class="mx-auto flex max-w-7xl flex-col items-center gap-10 px-6 py-16 lg:flex-row lg:py-24".to_string()>
                 <div class="flex-1">
                     <h2 class="text-3xl font-bold text-brand-blue">"AI 融入教學"</h2>
                     <p class="mt-6 text-base leading-[1.7] text-ink">
@@ -122,7 +122,7 @@ fn AiFeatureSection() -> impl IntoView {
                         "讓你從英文廢柴變成英文小天才🔥"
                     </span>
                 </div>
-            </div>
+            </Reveal>
         </section>
     }
 }
@@ -131,7 +131,7 @@ fn AiFeatureSection() -> impl IntoView {
 fn FounderSection() -> impl IntoView {
     view! {
         <section class="bg-white">
-            <div class="mx-auto flex max-w-7xl flex-col items-center gap-10 px-6 py-16 lg:flex-row lg:py-24">
+            <Reveal class="mx-auto flex max-w-7xl flex-col items-center gap-10 px-6 py-16 lg:flex-row lg:py-24".to_string()>
                 <div class="flex-1 text-center lg:order-2 lg:text-left">
                     <h2 class="text-2xl font-bold text-brand-blue">"創辦人 Penny"</h2>
                     <blockquote class="mt-4 text-lg leading-[1.7] text-ink">
@@ -146,7 +146,7 @@ fn FounderSection() -> impl IntoView {
                     alt="創辦人 Penny"
                     class="aspect-square w-full max-w-xs rounded-2xl object-cover flex-shrink-0 lg:order-1"
                 />
-            </div>
+            </Reveal>
         </section>
     }
 }
@@ -155,12 +155,12 @@ fn FounderSection() -> impl IntoView {
 fn VisionSection() -> impl IntoView {
     view! {
         <section class="bg-mist-blue">
-            <div class="mx-auto max-w-3xl px-6 py-16 text-center lg:py-24">
+            <Reveal class="mx-auto max-w-3xl px-6 py-16 text-center lg:py-24".to_string()>
                 <h2 class="text-3xl font-bold text-brand-blue">"品牌願景"</h2>
                 <p class="mt-6 text-lg leading-[1.7] text-ink">
                     "陪伴每位學習者建立自主學習能力，讓英文成為探索世界與實現夢想的力量。"
                 </p>
-            </div>
+            </Reveal>
         </section>
     }
 }

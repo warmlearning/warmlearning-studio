@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 use leptos_meta::{Meta, Title};
 
-use crate::components::{ButtonVariant, CtaButton};
+use crate::components::{ButtonVariant, CtaButton, Reveal};
 
 const LINE_URL: &str = "https://line.me/R/ti/p/@891ivojl";
 
@@ -39,30 +39,37 @@ pub fn FaqPage() -> impl IntoView {
         />
 
         <section class="bg-mist-blue">
-            <div class="mx-auto max-w-3xl px-6 py-16 lg:py-24">
+            <Reveal class="mx-auto max-w-3xl px-6 py-16 lg:py-24".to_string()>
                 <h1 class="text-center text-3xl font-bold text-brand-blue">"常見問題"</h1>
 
                 <div class="mt-12 flex flex-col gap-6">
                     {ANSWERED_FAQS
                         .iter()
-                        .map(|faq| {
+                        .enumerate()
+                        .map(|(i, faq)| {
                             view! {
-                                <div class="rounded-2xl bg-white p-6 shadow-md">
-                                    <h2 class="text-lg font-bold text-brand-blue">"Q：" {faq.question}</h2>
-                                    <p class="mt-3 text-sm leading-[1.7] text-slate-gray">{faq.answer}</p>
-                                </div>
+                                <Reveal delay_ms=(i as u32) * 110>
+                                    <div class="rounded-2xl bg-white p-6 shadow-md">
+                                        <h2 class="text-lg font-bold text-brand-blue">"Q：" {faq.question}</h2>
+                                        <p class="mt-3 text-sm leading-[1.7] text-slate-gray">{faq.answer}</p>
+                                    </div>
+                                </Reveal>
                             }
                         })
                         .collect_view()}
 
                     {PENDING_QUESTIONS
                         .iter()
-                        .map(|question| {
+                        .enumerate()
+                        .map(|(i, question)| {
+                            let delay_ms = ((ANSWERED_FAQS.len() + i) as u32) * 110;
                             view! {
-                                <div class="rounded-2xl bg-white p-6 shadow-md">
-                                    <h2 class="text-lg font-bold text-brand-blue">"Q：" {*question}</h2>
-                                    <p class="mt-3 text-sm leading-[1.7] text-slate-gray">"內容準備中"</p>
-                                </div>
+                                <Reveal delay_ms=delay_ms>
+                                    <div class="rounded-2xl bg-white p-6 shadow-md">
+                                        <h2 class="text-lg font-bold text-brand-blue">"Q：" {*question}</h2>
+                                        <p class="mt-3 text-sm leading-[1.7] text-slate-gray">"內容準備中"</p>
+                                    </div>
+                                </Reveal>
                             }
                         })
                         .collect_view()}
@@ -71,7 +78,7 @@ pub fn FaqPage() -> impl IntoView {
                 <div class="mt-12 flex justify-center">
                     <CtaButton href=LINE_URL label="還有其他問題？加入 LINE 諮詢" variant=ButtonVariant::Line/>
                 </div>
-            </div>
+            </Reveal>
         </section>
     }
 }
