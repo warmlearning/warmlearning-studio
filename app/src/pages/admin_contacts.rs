@@ -9,7 +9,8 @@ pub struct ContactSubmission {
     pub id: i64,
     pub name: String,
     pub phone: String,
-    pub course_interest: Option<String>,
+    pub learning_stage: Option<String>,
+    pub concern: Option<String>,
     pub message: Option<String>,
     pub is_read: bool,
     pub created_at: String,
@@ -21,21 +22,23 @@ pub async fn get_all_contacts() -> Result<Vec<ContactSubmission>, ServerFnError>
     crate::admin_auth::require_admin().await?;
     let pool = expect_context::<sqlx::SqlitePool>();
 
-    let rows: Vec<(i64, String, String, Option<String>, Option<String>, i64, String)> = sqlx::query_as(
-        "SELECT id, name, phone, course_interest, message, is_read, created_at
-         FROM contact_submissions ORDER BY created_at DESC",
-    )
-    .fetch_all(&pool)
-    .await
-    .map_err(|e| ServerFnError::new(e.to_string()))?;
+    let rows: Vec<(i64, String, String, Option<String>, Option<String>, Option<String>, i64, String)> =
+        sqlx::query_as(
+            "SELECT id, name, phone, learning_stage, concern, message, is_read, created_at
+             FROM contact_submissions ORDER BY created_at DESC",
+        )
+        .fetch_all(&pool)
+        .await
+        .map_err(|e| ServerFnError::new(e.to_string()))?;
 
     Ok(rows
         .into_iter()
-        .map(|(id, name, phone, course_interest, message, is_read, created_at)| ContactSubmission {
+        .map(|(id, name, phone, learning_stage, concern, message, is_read, created_at)| ContactSubmission {
             id,
             name,
             phone,
-            course_interest,
+            learning_stage,
+            concern,
             message,
             is_read: is_read != 0,
             created_at,
@@ -117,7 +120,10 @@ pub fn AdminContactsPage() -> impl IntoView {
                                                                     <span class="font-medium text-ink">{item.name.clone()}</span>
                                                                     <span class="text-sm text-slate-gray">{item.phone.clone()}</span>
                                                                     <span class="text-sm text-slate-gray">
-                                                                        {item.course_interest.clone().unwrap_or_else(|| "未填寫".to_string())}
+                                                                        {item.learning_stage.clone().unwrap_or_else(|| "未填寫".to_string())}
+                                                                    </span>
+                                                                    <span class="text-sm text-slate-gray">
+                                                                        {item.concern.clone().unwrap_or_else(|| "未填寫".to_string())}
                                                                     </span>
                                                                 </div>
                                                                 <span class="text-xs text-slate-gray">{item.created_at.clone()}</span>
