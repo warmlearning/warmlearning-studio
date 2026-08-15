@@ -125,7 +125,7 @@ pub fn ContactPage() -> impl IntoView {
                                 type="tel"
                                 name="phone"
                                 required
-                                placeholder="例如：0910-406-387"
+                                placeholder="例如：0912-345-678"
                                 class="rounded-xl border border-border-gray px-4 py-3 text-sm text-ink outline-none focus:border-brand-blue"
                             />
                         </div>
@@ -231,10 +231,6 @@ fn ContactInfoCard() -> impl IntoView {
             </p>
 
             <CtaButton href=LINE_URL label="LINE 詢問" variant=ButtonVariant::Line/>
-
-            <a href="tel:0910406387" class="text-sm text-slate-gray hover:text-brand-blue">
-                "或撥打電話 0910-406-387"
-            </a>
 
             <p class="text-sm text-slate-gray">"我們會盡快透過 LINE 或電話與您聯繫"</p>
 
