@@ -50,9 +50,6 @@ pub fn Footer() -> impl IntoView {
                         <ChatIcon/>
                         "LINE @891ivojl"
                     </a>
-                    <a href="tel:0910406387" class="text-ink hover:text-brand-blue">
-                        "0910-406-387"
-                    </a>
                     <div class="flex items-center gap-3 pt-1">
                         <a
                             href="https://www.instagram.com/warmlearning"
@@ -73,10 +70,11 @@ pub fn Footer() -> impl IntoView {
                             <FacebookIcon/>
                         </a>
                     </div>
-                    // TODO: LINE 官方帳號 QR Code 素材尚未提供，待補上後移除此佔位框
-                    <div class="mt-2 flex h-20 w-20 items-center justify-center border border-border-gray bg-mist-blue text-center text-xs text-slate-gray">
-                        "QR Code 準備中"
-                    </div>
+                    <img
+                        src="/img/line-qrcode.png"
+                        alt="LINE 官方帳號 QR Code"
+                        class="h-20 w-20 border border-border-gray object-contain"
+                    />
                 </div>
             </div>
 
