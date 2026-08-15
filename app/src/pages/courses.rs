@@ -5,8 +5,9 @@ use crate::components::{ButtonVariant, Card, CtaButton, Reveal};
 
 const LINE_URL: &str = "https://line.me/R/ti/p/@891ivojl";
 
+#[derive(Clone, Copy)]
 struct Stage {
-    emoji: &'static str,
+    emoji: Option<&'static str>,
     title: &'static str,
     anchor: &'static str,
     image: &'static str,
@@ -34,7 +35,7 @@ const LEARNING_FEATURE_CARDS: [LearningFeatureCard; 5] = [
 
 const STAGES: [Stage; 3] = [
     Stage {
-        emoji: "🌱",
+        emoji: Some("🌱"),
         title: "國小英文（打底）",
         anchor: "elementary",
         image: "/img/illustration-elementary.png",
@@ -45,7 +46,7 @@ const STAGES: [Stage; 3] = [
         outcome: "建立英文自信、喜歡閱讀、敢開口說英文",
     },
     Stage {
-        emoji: "🚀",
+        emoji: Some("🚀"),
         title: "國中英文（建立能力）",
         anchor: "middle",
         image: "/img/illustration-middle.png",
@@ -56,7 +57,7 @@ const STAGES: [Stage; 3] = [
         outcome: "英文能力穩定提升、建立自主學習習慣",
     },
     Stage {
-        emoji: "🎓",
+        emoji: Some("🎓"),
         title: "高中英文（突破）",
         anchor: "high",
         image: "/img/illustration-high.png",
@@ -68,6 +69,32 @@ const STAGES: [Stage; 3] = [
     },
 ];
 
+// 幼兒線上親子共學與成人英文，v13 改用跟國小～高中三階段相同的卡片版面，
+// 內容依 spec.md 4.3③ 表格拆解；不存在的欄位標註「待填寫詳細內文」，不代填臆測內容
+const FAMILY_STAGE: Stage = Stage {
+    emoji: None,
+    title: "幼兒線上親子共學",
+    anchor: "family",
+    image: "/img/illustration-kids-parents.png",
+    audience: "學齡前～國小低年級親子",
+    basic: "待填寫詳細內文",
+    advanced: "待填寫詳細內文",
+    ability: "待填寫詳細內文",
+    outcome: "陪伴孩子從小養成規律接觸英文的習慣，是知暖「持續學習」理念的入門形式",
+};
+
+const ADULT_STAGE: Stage = Stage {
+    emoji: None,
+    title: "成人英文",
+    anchor: "adult",
+    image: "/img/illustration-adult.png",
+    audience: "想重新建立英文基礎、提升口說表達、準備職場需求，或希望找回學習自信的學習者",
+    basic: "小班互動與陪伴式教學，結合生活情境、實用會話及聽說讀寫整合訓練",
+    advanced: "待填寫詳細內文",
+    ability: "待填寫詳細內文",
+    outcome: "英文逐漸融入日常，建立持續學習的習慣與自信",
+};
+
 #[component]
 pub fn CoursesPage() -> impl IntoView {
     view! {
@@ -78,8 +105,8 @@ pub fn CoursesPage() -> impl IntoView {
         />
 
         <PageHeader/>
-        <TimelineSection/>
         <LearningCycleSection/>
+        <TimelineSection/>
         <FooterCtaSection/>
     }
 }
@@ -103,16 +130,7 @@ fn TimelineSection() -> impl IntoView {
     view! {
         <section class="bg-white">
             <Reveal class="mx-auto max-w-5xl px-6 py-16 lg:py-24".to_string()>
-                <div id="family" class="scroll-mt-24">
-                    <Card class="p-6".to_string()>
-                        <h2 class="text-xl font-bold text-ink">"幼兒線上親子共學"</h2>
-                        <p class="mt-3 text-sm leading-[1.7] text-slate-gray">
-                            "每次 30 分鐘的線上課程，陪伴孩子從小養成規律接觸英文的習慣，是知暖「持續學習」理念的入門形式，適合學齡前～國小低年級親子一起參與。"
-                        </p>
-                        // TODO: 詳細課程說明文案待 Penny 提供，見 spec.md 4.3 節與 14 待補內容清單
-                        <p class="mt-2 text-sm text-slate-gray">"詳細課程內容｜資料整理中"</p>
-                    </Card>
-                </div>
+                <StageCard stage=FAMILY_STAGE/>
 
                 <p class="mt-16 text-center text-lg font-medium text-brand-blue">
                     "🌱 國小英文（打底）→ 🚀 國中英文（建立能力）→ 🎓 高中英文（突破）"
@@ -124,59 +142,59 @@ fn TimelineSection() -> impl IntoView {
                 <div class="mt-12 flex flex-col gap-16">
                     {STAGES
                         .iter()
-                        .map(|stage| {
-                            view! {
-                                <div id=stage.anchor class="scroll-mt-24">
-                                    <div class="flex flex-col items-center gap-8 lg:flex-row">
-                                        <div class="flex-1 lg:order-2">
-                                            <h2 class="text-2xl font-bold text-brand-blue">
-                                                {stage.emoji} " " {stage.title}
-                                            </h2>
-                                            <dl class="mt-4 grid grid-cols-1 gap-4 text-sm leading-[1.7] sm:grid-cols-2">
-                                                <div>
-                                                    <dt class="font-bold text-ink">"適合對象"</dt>
-                                                    <dd class="text-slate-gray">{stage.audience}</dd>
-                                                </div>
-                                                <div>
-                                                    <dt class="font-bold text-ink">"能力養成"</dt>
-                                                    <dd class="text-slate-gray">{stage.ability}</dd>
-                                                </div>
-                                                <div>
-                                                    <dt class="font-bold text-ink">"基礎班內容"</dt>
-                                                    <dd class="text-slate-gray">{stage.basic}</dd>
-                                                </div>
-                                                <div>
-                                                    <dt class="font-bold text-ink">"進階班內容"</dt>
-                                                    <dd class="text-slate-gray">{stage.advanced}</dd>
-                                                </div>
-                                                <div class="sm:col-span-2">
-                                                    <dt class="font-bold text-ink">"成果"</dt>
-                                                    <dd class="text-slate-gray">{stage.outcome}</dd>
-                                                </div>
-                                            </dl>
-                                        </div>
-                                        <img
-                                            src=stage.image
-                                            alt=format!("{} 插圖", stage.title)
-                                            class="w-full max-w-xs flex-shrink-0 lg:order-1 lg:max-w-sm"
-                                        />
-                                    </div>
-                                </div>
-                            }
-                        })
+                        .map(|stage| view! { <StageCard stage=*stage/> })
                         .collect_view()}
                 </div>
 
-                <div id="adult" class="mt-16 scroll-mt-24">
-                    <Card class="p-6".to_string()>
-                        <h2 class="text-xl font-bold text-ink">"成人英文"</h2>
-                        <p class="mt-3 text-sm leading-[1.7] text-slate-gray">
-                            "學習英文，不該只是背單字、記文法，更重要的是能真正運用在生活與工作中。知暖成人英文課程適合想重新建立英文基礎、提升口說表達、準備職場需求，或希望找回學習自信的學習者。我們採小班互動與陪伴式教學，結合生活情境、實用會話及聽說讀寫整合訓練，依照每位學員的程度調整學習內容，讓英文逐漸融入日常，建立持續學習的習慣與自信。"
-                        </p>
-                    </Card>
+                <div class="mt-16">
+                    <StageCard stage=ADULT_STAGE/>
                 </div>
             </Reveal>
         </section>
+    }
+}
+
+/// 課程地圖卡片版面（spec.md 4.3③），幼兒線上親子共學／國小／國中／高中／成人英文
+/// 五張卡片共用同一版面：圖片＋固定欄位結構（適合對象／基礎班內容／進階班內容／能力養成／成果）
+#[component]
+fn StageCard(stage: Stage) -> impl IntoView {
+    view! {
+        <div id=stage.anchor class="scroll-mt-24">
+            <div class="flex flex-col items-center gap-8 lg:flex-row">
+                <div class="flex-1 lg:order-2">
+                    <h2 class="text-2xl font-bold text-brand-blue">
+                        {stage.emoji.map(|emoji| format!("{emoji} "))} {stage.title}
+                    </h2>
+                    <dl class="mt-4 grid grid-cols-1 gap-4 text-sm leading-[1.7] sm:grid-cols-2">
+                        <div>
+                            <dt class="font-bold text-ink">"適合對象"</dt>
+                            <dd class="text-slate-gray">{stage.audience}</dd>
+                        </div>
+                        <div>
+                            <dt class="font-bold text-ink">"能力養成"</dt>
+                            <dd class="text-slate-gray">{stage.ability}</dd>
+                        </div>
+                        <div>
+                            <dt class="font-bold text-ink">"基礎班內容"</dt>
+                            <dd class="text-slate-gray">{stage.basic}</dd>
+                        </div>
+                        <div>
+                            <dt class="font-bold text-ink">"進階班內容"</dt>
+                            <dd class="text-slate-gray">{stage.advanced}</dd>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <dt class="font-bold text-ink">"成果"</dt>
+                            <dd class="text-slate-gray">{stage.outcome}</dd>
+                        </div>
+                    </dl>
+                </div>
+                <img
+                    src=stage.image
+                    alt=format!("{} 插圖", stage.title)
+                    class="w-full max-w-xs flex-shrink-0 lg:order-1 lg:max-w-sm"
+                />
+            </div>
+        </div>
     }
 }
 
