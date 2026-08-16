@@ -10,8 +10,11 @@ struct Stage {
     anchor: &'static str,
     image: &'static str,
     audience: &'static str,
+    /// 國小／國中／高中維持「基礎班內容」語意；幼兒親子共學／成人英文不分級，
+    /// 這裡直接承載完整的「課程內容說明」（spec.md 4.3② v16 版面調整）
     basic: &'static str,
-    advanced: &'static str,
+    /// `None` 表示這張卡片不分級，不渲染「進階班內容」區塊
+    advanced: Option<&'static str>,
     ability: &'static str,
     outcome: &'static str,
 }
@@ -44,8 +47,8 @@ const STAGES: [Stage; 3] = [
         anchor: "elementary",
         image: "/img/illustration-elementary.png",
         audience: "國小一年級～六年級（6～12 歲）",
-        basic: "Phonics 自然發音、基礎字彙、簡單會話、繪本閱讀入門",
-        advanced: "閱讀理解、口說表達、繪本延伸閱讀、AI 互動練習",
+        basic: "Phonics 自然發音、基礎字彙、基礎會話、繪本閱讀入門",
+        advanced: Some("閱讀理解、口說表達、繪本延伸閱讀、AI 互動練習"),
         ability: "聽、說、讀、寫、自主完成作業",
         outcome: "建立英文自信、喜歡閱讀、敢開口說英文",
     },
@@ -56,7 +59,7 @@ const STAGES: [Stage; 3] = [
         image: "/img/illustration-middle.png",
         audience: "國一～國三（12～15 歲）",
         basic: "文法基礎、單字累積、閱讀入門、聽力入門",
-        advanced: "長篇閱讀、寫作訓練、聽力強化、自主讀書規劃",
+        advanced: Some("長篇閱讀、寫作訓練、聽力強化、自主讀書規劃"),
         ability: "能閱讀長篇文章、建立筆記能力、自主規劃讀書、學會錯題整理",
         outcome: "英文能力穩定提升、建立自主學習習慣",
     },
@@ -67,7 +70,7 @@ const STAGES: [Stage; 3] = [
         image: "/img/illustration-high.png",
         audience: "高一～高三（15～18 歲）",
         basic: "文法統整、閱讀測驗基礎、寫作入門",
-        advanced: "英文思辨、進階寫作、AI 輔助閱讀與寫作應用",
+        advanced: Some("英文思辨、進階寫作、AI 輔助閱讀與寫作應用"),
         ability: "大量閱讀、英文表達、邏輯思考、自主學習、簡報能力",
         outcome: "具備英文自主閱讀能力、銜接大學英文程度",
     },
@@ -75,6 +78,7 @@ const STAGES: [Stage; 3] = [
 
 // 幼兒線上親子共學與成人英文，v13 改用跟國小～高中三階段相同的卡片版面，
 // 內容依 spec.md 4.3③ 表格拆解；不存在的欄位標註「待填寫詳細內文」，不代填臆測內容
+// v16：這兩張卡片不分基礎／進階班，advanced 一律為 None，basic 欄位承載完整「課程內容說明」
 const FAMILY_STAGE: Stage = Stage {
     emoji: None,
     title: "幼兒線上親子共學",
@@ -82,7 +86,7 @@ const FAMILY_STAGE: Stage = Stage {
     image: "/img/illustration-kids-parents.png",
     audience: "學齡前～國小低年級親子（6 歲以下）",
     basic: "待填寫詳細內文",
-    advanced: "待填寫詳細內文",
+    advanced: None,
     ability: "待填寫詳細內文",
     outcome: "陪伴孩子從小養成規律接觸英文的習慣，是知暖「持續學習」理念的入門形式",
 };
@@ -94,7 +98,7 @@ const ADULT_STAGE: Stage = Stage {
     image: "/img/illustration-adult.png",
     audience: "想重新建立英文基礎、提升口說表達、準備職場需求，或希望找回學習自信的學習者（18 歲以上）",
     basic: "小班互動與陪伴式教學，結合生活情境、實用會話及聽說讀寫整合訓練",
-    advanced: "待填寫詳細內文",
+    advanced: None,
     ability: "待填寫詳細內文",
     outcome: "英文逐漸融入日常，建立持續學習的習慣與自信",
 };
@@ -157,13 +161,21 @@ fn StageCard(stage: Stage) -> impl IntoView {
                             <dd class="text-slate-gray">{stage.ability}</dd>
                         </div>
                         <div>
-                            <dt class="font-bold text-ink">"基礎班內容"</dt>
+                            <dt class="font-bold text-ink">
+                                {if stage.advanced.is_some() { "基礎班內容" } else { "課程內容說明" }}
+                            </dt>
                             <dd class="text-slate-gray">{stage.basic}</dd>
                         </div>
-                        <div>
-                            <dt class="font-bold text-ink">"進階班內容"</dt>
-                            <dd class="text-slate-gray">{stage.advanced}</dd>
-                        </div>
+                        {stage
+                            .advanced
+                            .map(|advanced| {
+                                view! {
+                                    <div>
+                                        <dt class="font-bold text-ink">"進階班內容"</dt>
+                                        <dd class="text-slate-gray">{advanced}</dd>
+                                    </div>
+                                }
+                            })}
                         <div class="sm:col-span-2">
                             <dt class="font-bold text-ink">"成果"</dt>
                             <dd class="text-slate-gray">{stage.outcome}</dd>
