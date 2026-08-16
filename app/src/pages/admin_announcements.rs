@@ -60,10 +60,10 @@ pub fn AdminAnnouncementsListPage() -> impl IntoView {
         <section class="bg-white">
             <div class="mx-auto max-w-5xl px-6 py-12">
                 <div class="flex flex-wrap items-center justify-between gap-4">
-                    <h1 class="text-2xl font-bold text-brand-blue">"公告管理"</h1>
+                    <h1 class="text-3xl font-bold text-brand-blue">"公告管理"</h1>
                     <a
                         href="/admin/announcements/new"
-                        class="rounded-full bg-brand-blue px-6 py-2.5 text-sm font-medium text-white hover:bg-[#14294F]"
+                        class="rounded-full bg-brand-blue px-6 py-2.5 text-base font-medium text-white hover:bg-[#14294F]"
                     >
                         "新增公告"
                     </a>
@@ -80,7 +80,7 @@ pub fn AdminAnnouncementsListPage() -> impl IntoView {
                                 Ok(items) => {
                                     view! {
                                         <div class="mt-8 overflow-x-auto">
-                                            <table class="w-full text-left text-sm">
+                                            <table class="w-full text-left text-base">
                                                 <thead>
                                                     <tr class="border-b border-border-gray text-slate-gray">
                                                         <th class="py-2 pr-4 font-medium">"標題"</th>
@@ -104,9 +104,9 @@ pub fn AdminAnnouncementsListPage() -> impl IntoView {
                                                                     <td class="py-3 pr-4 text-ink">{item.title.clone()}</td>
                                                                     <td class="py-3 pr-4">
                                                                         <span class=if item.status == "published" {
-                                                                            "rounded-full bg-mist-blue px-2 py-0.5 text-xs text-brand-blue"
+                                                                            "rounded-full bg-mist-blue px-2 py-0.5 text-sm text-brand-blue"
                                                                         } else {
-                                                                            "rounded-full bg-border-gray px-2 py-0.5 text-xs text-slate-gray"
+                                                                            "rounded-full bg-border-gray px-2 py-0.5 text-sm text-slate-gray"
                                                                         }>{status_label}</span>
                                                                     </td>
                                                                     <td class="py-3 pr-4 text-slate-gray">
@@ -154,7 +154,7 @@ pub fn AdminAnnouncementsListPage() -> impl IntoView {
                                     view! {
                                         <div class="mt-8">
                                             <p class="text-error-red">{friendly_error_message(&e)}</p>
-                                            <a href="/admin/login" class="mt-2 inline-block text-sm text-brand-blue hover:underline">
+                                            <a href="/admin/login" class="mt-2 inline-block text-base text-brand-blue hover:underline">
                                                 "請重新登入"
                                             </a>
                                         </div>

@@ -42,7 +42,7 @@ pub fn FaqPage() -> impl IntoView {
 
         <section class="bg-mist-blue">
             <Reveal class="mx-auto max-w-3xl px-6 py-16 lg:py-24".to_string()>
-                <h1 class="text-center text-3xl font-bold text-brand-blue">"常見問題"</h1>
+                <h1 class="text-center text-4xl font-bold text-brand-blue">"常見問題"</h1>
 
                 <div class="mt-12 flex flex-col gap-6">
                     {ANSWERED_FAQS
@@ -52,8 +52,8 @@ pub fn FaqPage() -> impl IntoView {
                             view! {
                                 <Reveal delay_ms=(i as u32) * 110>
                                     <div class="rounded-2xl bg-white p-6 shadow-md">
-                                        <h2 class="text-lg font-bold text-brand-blue">"Q：" {faq.question}</h2>
-                                        <p class="mt-3 text-sm leading-[1.7] text-slate-gray">{faq.answer}</p>
+                                        <h2 class="text-xl font-bold text-brand-blue">"Q：" {faq.question}</h2>
+                                        <p class="mt-3 text-base leading-[1.7] text-slate-gray">{faq.answer}</p>
                                     </div>
                                 </Reveal>
                             }
@@ -68,8 +68,8 @@ pub fn FaqPage() -> impl IntoView {
                             view! {
                                 <Reveal delay_ms=delay_ms>
                                     <div class="rounded-2xl bg-white p-6 shadow-md">
-                                        <h2 class="text-lg font-bold text-brand-blue">"Q：" {*question}</h2>
-                                        <p class="mt-3 text-sm leading-[1.7] text-slate-gray">"內容準備中"</p>
+                                        <h2 class="text-xl font-bold text-brand-blue">"Q：" {*question}</h2>
+                                        <p class="mt-3 text-base leading-[1.7] text-slate-gray">"內容準備中"</p>
                                     </div>
                                 </Reveal>
                             }

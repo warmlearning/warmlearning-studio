@@ -30,7 +30,7 @@ pub fn CtaButton(
         <a
             href=href
             class=format!(
-                "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-8 py-3 font-medium transition-all duration-200 {variant_class} {class}",
+                "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-8 py-3 text-lg font-medium transition-all duration-200 {variant_class} {class}",
             )
         >
             <Show when=move || is_line>

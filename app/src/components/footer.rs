@@ -26,7 +26,7 @@ pub fn Footer() -> impl IntoView {
                 </div>
 
                 <div class="flex flex-col gap-3">
-                    <span class="text-sm font-bold text-slate-gray">"快速連結"</span>
+                    <span class="text-base font-bold text-slate-gray">"快速連結"</span>
                     {QUICK_LINKS
                         .iter()
                         .map(|(href, label)| {
@@ -40,7 +40,7 @@ pub fn Footer() -> impl IntoView {
                 </div>
 
                 <div class="flex flex-col gap-3">
-                    <span class="text-sm font-bold text-slate-gray">"聯絡資訊"</span>
+                    <span class="text-base font-bold text-slate-gray">"聯絡資訊"</span>
                     <a
                         href="https://line.me/R/ti/p/@891ivojl"
                         target="_blank"
@@ -78,7 +78,7 @@ pub fn Footer() -> impl IntoView {
                 </div>
             </div>
 
-            <div class="border-t border-border-gray py-6 text-center text-xs text-slate-gray">
+            <div class="border-t border-border-gray py-6 text-center text-sm text-slate-gray">
                 "© 2026 知暖學習工作室 All Rights Reserved."
             </div>
         </footer>

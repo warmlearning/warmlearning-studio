@@ -11,9 +11,9 @@ pub fn PrivacyPage() -> impl IntoView {
 
         <section class="bg-white">
             <Reveal class="mx-auto max-w-3xl px-6 py-16 lg:py-24".to_string()>
-                <h1 class="text-center text-3xl font-bold text-brand-blue">"隱私權政策與服務條款"</h1>
+                <h1 class="text-center text-4xl font-bold text-brand-blue">"隱私權政策與服務條款"</h1>
 
-                <nav class="mt-8 flex justify-center gap-6 text-sm">
+                <nav class="mt-8 flex justify-center gap-6 text-base">
                     <a href="#privacy-policy" class="text-brand-blue hover:underline">
                         "隱私權政策"
                     </a>
@@ -23,8 +23,8 @@ pub fn PrivacyPage() -> impl IntoView {
                 </nav>
 
                 <article id="privacy-policy" class="mt-12 scroll-mt-24">
-                    <h2 class="text-2xl font-bold text-brand-blue">"隱私權政策"</h2>
-                    <div class="mt-4 flex flex-col gap-4 text-sm leading-[1.7] text-ink">
+                    <h2 class="text-3xl font-bold text-brand-blue">"隱私權政策"</h2>
+                    <div class="mt-4 flex flex-col gap-4 text-base leading-[1.7] text-ink">
                         <p>
                             "知暖學習工作室（以下稱「本工作室」）非常重視您的隱私權，以下說明我們如何蒐集、使用及保護您透過本網站提供的個人資料。"
                         </p>
@@ -75,8 +75,8 @@ pub fn PrivacyPage() -> impl IntoView {
                 </article>
 
                 <article id="terms-of-service" class="mt-16 scroll-mt-24">
-                    <h2 class="text-2xl font-bold text-brand-blue">"服務條款"</h2>
-                    <div class="mt-4 flex flex-col gap-4 text-sm leading-[1.7] text-ink">
+                    <h2 class="text-3xl font-bold text-brand-blue">"服務條款"</h2>
+                    <div class="mt-4 flex flex-col gap-4 text-base leading-[1.7] text-ink">
                         <p>
                             "歡迎使用知暖學習工作室（以下稱「本工作室」）官方網站。當您使用本網站，即表示您同意以下條款："
                         </p>

@@ -162,7 +162,7 @@ pub fn NewsListPage() -> impl IntoView {
 
         <section class="bg-mist-blue">
             <div class="mx-auto max-w-7xl px-6 py-16 lg:py-24">
-                <h1 class="text-center text-3xl font-bold text-brand-blue">"最新消息"</h1>
+                <h1 class="text-center text-4xl font-bold text-brand-blue">"最新消息"</h1>
 
                 <Suspense fallback=move || {
                     view! {
@@ -204,13 +204,13 @@ pub fn NewsListPage() -> impl IntoView {
                                                                         }
                                                                     })}
                                                                 <div class="flex flex-1 flex-col gap-2 p-5">
-                                                                    <p class="text-xs text-slate-gray">
+                                                                    <p class="text-sm text-slate-gray">
                                                                         {format_date(&item.published_at)}
                                                                     </p>
-                                                                    <h2 class="text-xl font-bold text-ink">
+                                                                    <h2 class="text-2xl font-bold text-ink">
                                                                         {item.title.clone()}
                                                                     </h2>
-                                                                    <p class="flex-1 text-sm leading-[1.7] text-slate-gray">
+                                                                    <p class="flex-1 text-base leading-[1.7] text-slate-gray">
                                                                         {item.excerpt.clone()}
                                                                     </p>
                                                                 </div>
@@ -227,13 +227,13 @@ pub fn NewsListPage() -> impl IntoView {
                                                     view! {
                                                         <a
                                                             href=format!("/news?page={}", page - 1)
-                                                            class="text-sm font-medium text-brand-blue hover:underline"
+                                                            class="text-base font-medium text-brand-blue hover:underline"
                                                         >
                                                             "← 上一頁"
                                                         </a>
                                                     }
                                                 })}
-                                            <span class="text-sm text-slate-gray">
+                                            <span class="text-base text-slate-gray">
                                                 {format!("第 {} / {} 頁", page, total_pages)}
                                             </span>
                                             {(page < total_pages)
@@ -241,7 +241,7 @@ pub fn NewsListPage() -> impl IntoView {
                                                     view! {
                                                         <a
                                                             href=format!("/news?page={}", page + 1)
-                                                            class="text-sm font-medium text-brand-blue hover:underline"
+                                                            class="text-base font-medium text-brand-blue hover:underline"
                                                         >
                                                             "下一頁 →"
                                                         </a>
@@ -285,8 +285,8 @@ pub fn NewsDetailPage() -> impl IntoView {
                                     view! {
                                         <Title text=format!("{}｜知暖最新消息", item.title)/>
                                         <article>
-                                            <h1 class="text-3xl font-bold text-brand-blue">{item.title.clone()}</h1>
-                                            <p class="mt-3 text-sm text-slate-gray">
+                                            <h1 class="text-4xl font-bold text-brand-blue">{item.title.clone()}</h1>
+                                            <p class="mt-3 text-base text-slate-gray">
                                                 {format_date(&item.published_at)}
                                             </p>
                                             {item
@@ -302,13 +302,13 @@ pub fn NewsDetailPage() -> impl IntoView {
                                                     }
                                                 })}
                                             <div
-                                                class="prose prose-slate mt-8 max-w-none text-sm leading-[1.7] text-ink"
+                                                class="prose prose-slate mt-8 max-w-none text-base leading-[1.7] text-ink"
                                                 inner_html=item.content.clone()
                                             ></div>
                                         </article>
                                         <a
                                             href="/news"
-                                            class="mt-12 inline-block text-sm font-medium text-brand-blue hover:underline"
+                                            class="mt-12 inline-block text-base font-medium text-brand-blue hover:underline"
                                         >
                                             "← 返回最新消息列表"
                                         </a>
@@ -319,7 +319,7 @@ pub fn NewsDetailPage() -> impl IntoView {
                                     view! {
                                         <p class="text-center text-slate-gray">"找不到這篇公告，可能已被下架或網址有誤。"</p>
                                         <div class="mt-6 text-center">
-                                            <a href="/news" class="text-sm font-medium text-brand-blue hover:underline">
+                                            <a href="/news" class="text-base font-medium text-brand-blue hover:underline">
                                                 "← 返回最新消息列表"
                                             </a>
                                         </div>

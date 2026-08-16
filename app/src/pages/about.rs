@@ -4,8 +4,12 @@ use leptos_meta::{Meta, Title};
 use crate::components::icons::{HeartIcon, PersonIcon, TrendUpIcon};
 use crate::components::{Card, Reveal};
 
-/// 創辦人經歷段落，沿用先前已定案的敘事文案，併入第三屏呈現（spec.md 4.2「創辦人經歷段落」）
-const FOUNDER_BIO: &str = "Penny 擁有 7 年英文教學經驗，擅長在對話中快速理解真正的問題所在，用引導式的提問幫助孩子跟家長釐清想法與目標，而不是急著給答案。她重視關係經營，相信信任感是學習動力的根本；也把多年帶班、辦活動、公開表達的經驗，轉化成一套能被複製、能被系統化執行的教學方法——這也是「知暖成長之旅 Learning Journey」的由來。";
+/// 「Penny老師想說的話」，沿用先前已定案的敘事文案，併入第三屏呈現
+/// （spec.md 4.2「Penny老師想說的話」，v15 更名並拆成兩段呈現，原名「創辦人經歷段落」）
+const FOUNDER_BIO_PARAGRAPHS: [&str; 2] = [
+    "Penny 擁有 7 年英文教學經驗，擅長在對話中快速理解真正的問題所在，用引導式的提問幫助孩子跟家長釐清想法與目標，而不是急著給答案。",
+    "她重視關係經營，相信信任感是學習動力的根本；也把多年帶班、辦活動、公開表達的經驗，轉化成一套能被複製、能被系統化執行的教學方法——這也是「知暖成長之旅 Learning Journey」的由來。",
+];
 
 struct BeliefCard {
     title: &'static str,
@@ -59,8 +63,8 @@ fn HeroScreen() -> impl IntoView {
                     alt="知暖學習工作室創辦人 Penny"
                     class="aspect-square w-full max-w-xs rounded-2xl object-cover"
                 />
-                <h1 class="text-3xl font-bold leading-[1.4] text-brand-blue lg:text-4xl">
-                    "從一堂英文課，走向一段更長久的學習陪伴"
+                <h1 class="text-4xl font-bold leading-[1.4] text-brand-blue lg:text-5xl">
+                    "從學習英文開始，建立屬於自己的學習成長系統"
                 </h1>
             </Reveal>
         </section>
@@ -73,8 +77,8 @@ fn ProblemScreen() -> impl IntoView {
     view! {
         <section class="bg-white">
             <Reveal class="mx-auto max-w-3xl px-6 py-16 lg:py-24".to_string()>
-                <h2 class="text-center text-3xl font-bold text-brand-blue">"我看見的問題"</h2>
-                <div class="mt-8 flex flex-col gap-5 text-base leading-[1.7] text-ink">
+                <h2 class="text-center text-4xl font-bold text-brand-blue">"我看見的問題"</h2>
+                <div class="mt-8 flex flex-col gap-5 text-lg leading-[1.7] text-ink">
                     <p>
                         "一開始教英文時，我和很多老師一樣，希望把課教清楚、把學生不會的地方教會，也希望看見孩子的成績慢慢進步。"
                     </p>
@@ -104,8 +108,8 @@ fn WhyWarmLearningScreen() -> impl IntoView {
     view! {
         <section class="bg-mist-blue">
             <Reveal class="mx-auto max-w-3xl px-6 py-16 lg:py-24".to_string()>
-                <h2 class="text-center text-3xl font-bold text-brand-blue">"為什麼有知暖"</h2>
-                <div class="mt-8 flex flex-col gap-5 text-base leading-[1.7] text-ink">
+                <h2 class="text-center text-4xl font-bold text-brand-blue">"為什麼有知暖"</h2>
+                <div class="mt-8 flex flex-col gap-5 text-lg leading-[1.7] text-ink">
                     <p>
                         "我慢慢發現，一堂真正有價值的課，不應該只結束在「今天教完多少內容」。除了英文能力之外，孩子其實也需要慢慢學會：怎麼看見自己的問題、怎麼安排練習、怎麼回頭檢查、怎麼調整方法，以及遇到不會的事情時，怎麼繼續往下走。"
                     </p>
@@ -122,8 +126,13 @@ fn WhyWarmLearningScreen() -> impl IntoView {
                 </div>
 
                 <Card class="mt-10 p-6".to_string()>
-                    <p class="text-sm font-bold text-brand-blue">"創辦人 Penny"</p>
-                    <p class="mt-2 text-sm leading-[1.7] text-slate-gray">{FOUNDER_BIO}</p>
+                    <p class="text-xl font-bold text-brand-blue">"Penny老師想說的話"</p>
+                    <div class="mt-3 flex flex-col gap-4 text-xl leading-[1.7] text-slate-gray">
+                        {FOUNDER_BIO_PARAGRAPHS
+                            .iter()
+                            .map(|paragraph| view! { <p>{*paragraph}</p> })
+                            .collect_view()}
+                    </div>
                 </Card>
             </Reveal>
         </section>
@@ -136,8 +145,8 @@ fn WhatWeBelieveScreen() -> impl IntoView {
     view! {
         <section class="bg-white">
             <Reveal class="mx-auto max-w-5xl px-6 py-16 lg:py-24".to_string()>
-                <h2 class="text-center text-3xl font-bold text-brand-blue">"知暖相信的學習"</h2>
-                <p class="mx-auto mt-6 max-w-3xl text-center text-base leading-[1.7] text-ink">
+                <h2 class="text-center text-4xl font-bold text-brand-blue">"知暖相信的學習"</h2>
+                <p class="mx-auto mt-6 max-w-3xl text-center text-lg leading-[1.7] text-ink">
                     "「知暖」對我們來說，有兩個很重要的力量。"
                 </p>
 
@@ -156,8 +165,8 @@ fn WhatWeBelieveScreen() -> impl IntoView {
                                                 _ => view! { <TrendUpIcon/> }.into_any(),
                                             }}
                                         </div>
-                                        <h3 class="text-xl font-bold text-ink">{belief.title}</h3>
-                                        <p class="text-sm leading-[1.7] text-slate-gray">{belief.body}</p>
+                                        <h3 class="text-2xl font-bold text-ink">{belief.title}</h3>
+                                        <p class="text-base leading-[1.7] text-slate-gray">{belief.body}</p>
                                     </div>
                                 </Reveal>
                             }
@@ -175,7 +184,7 @@ fn LearningJourneyScreen() -> impl IntoView {
     view! {
         <section class="bg-mist-blue">
             <Reveal class="mx-auto max-w-3xl px-6 py-16 lg:py-24".to_string()>
-                <h2 class="text-center text-3xl font-bold text-brand-blue">"從被帶著學到知道怎麼學"</h2>
+                <h2 class="text-center text-4xl font-bold text-brand-blue">"從被帶著學到知道怎麼學"</h2>
 
                 <div class="mt-10 flex flex-col items-center gap-3 lg:flex-row lg:justify-center lg:gap-4">
                     {LEARNING_JOURNEY_STEPS
@@ -183,16 +192,16 @@ fn LearningJourneyScreen() -> impl IntoView {
                         .enumerate()
                         .map(|(i, step)| {
                             view! {
-                                <div class="rounded-full bg-white px-6 py-3 text-center text-sm font-bold text-brand-blue shadow-md lg:text-base">
+                                <div class="rounded-full bg-white px-6 py-3 text-center text-base font-bold text-brand-blue shadow-md lg:text-lg">
                                     {*step}
                                 </div>
                                 {(i < LEARNING_JOURNEY_STEPS.len() - 1)
                                     .then(|| {
                                         view! {
-                                            <span aria-hidden="true" class="text-xl font-bold text-sky-blue lg:hidden">
+                                            <span aria-hidden="true" class="text-2xl font-bold text-sky-blue lg:hidden">
                                                 "↓"
                                             </span>
-                                            <span aria-hidden="true" class="hidden text-xl font-bold text-sky-blue lg:inline">
+                                            <span aria-hidden="true" class="hidden text-2xl font-bold text-sky-blue lg:inline">
                                                 "→"
                                             </span>
                                         }
@@ -202,7 +211,7 @@ fn LearningJourneyScreen() -> impl IntoView {
                         .collect_view()}
                 </div>
 
-                <div class="mt-10 flex flex-col gap-5 text-base leading-[1.7] text-ink">
+                <div class="mt-10 flex flex-col gap-5 text-lg leading-[1.7] text-ink">
                     <p>
                         "現在的知暖，希望做的不只是英文教學。我們正在建立一套從英文能力、學習方法、學習習慣，到自主學習，逐漸成長的學習系統。"
                     </p>
@@ -222,8 +231,8 @@ fn VisionScreen() -> impl IntoView {
     view! {
         <section class="bg-white">
             <Reveal class="mx-auto max-w-3xl px-6 py-16 lg:py-24".to_string()>
-                <h2 class="text-center text-3xl font-bold text-brand-blue">"我們想陪孩子去的地方"</h2>
-                <div class="mt-8 flex flex-col gap-5 text-base leading-[1.7] text-ink">
+                <h2 class="text-center text-4xl font-bold text-brand-blue">"我們想陪孩子去的地方"</h2>
+                <div class="mt-8 flex flex-col gap-5 text-lg leading-[1.7] text-ink">
                     <p>
                         "成績很重要，升學也很重要。但如果可以，我們希望孩子在一次次學習的過程裡，帶走更多東西：對自己的理解、面對困難的方法、持續練習的能力，以及相信自己可以慢慢進步的信心。"
                     </p>
@@ -231,7 +240,7 @@ fn VisionScreen() -> impl IntoView {
                         "我們希望有一天，即使老師不在旁邊，即使他遇到的是一個從來沒有學過的新問題，他仍然知道：" <strong>"我可以先從哪裡開始。"</strong>
                     </p>
                     <p>"如果這份能力能陪著孩子走進國中、高中、大學，甚至走進未來的人生，那就是知暖最希望留下的事情。"</p>
-                    <p class="text-lg font-medium text-brand-blue">
+                    <p class="text-xl font-medium text-brand-blue">
                         "知足上進，溫暖而堅定。陪伴每一個孩子，把學習慢慢變成自己的力量。"
                     </p>
                 </div>

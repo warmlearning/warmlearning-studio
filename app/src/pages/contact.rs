@@ -100,11 +100,11 @@ pub fn ContactPage() -> impl IntoView {
                 <ContactInfoCard/>
 
                 <Card class="p-6 lg:p-10".to_string()>
-                    <h2 class="text-2xl font-bold text-brand-blue">"預約學習諮詢"</h2>
+                    <h2 class="text-3xl font-bold text-brand-blue">"預約學習諮詢"</h2>
 
                     <ActionForm action=submit_action attr:class="mt-6 flex flex-col gap-5">
                         <div class="flex flex-col gap-1.5">
-                            <label for="contact-name" class="text-sm font-medium text-ink">
+                            <label for="contact-name" class="text-base font-medium text-ink">
                                 "姓名"
                             </label>
                             <input
@@ -112,12 +112,12 @@ pub fn ContactPage() -> impl IntoView {
                                 type="text"
                                 name="name"
                                 required
-                                class="rounded-xl border border-border-gray px-4 py-3 text-sm text-ink outline-none focus:border-brand-blue"
+                                class="rounded-xl border border-border-gray px-4 py-3 text-base text-ink outline-none focus:border-brand-blue"
                             />
                         </div>
 
                         <div class="flex flex-col gap-1.5">
-                            <label for="contact-phone" class="text-sm font-medium text-ink">
+                            <label for="contact-phone" class="text-base font-medium text-ink">
                                 "聯絡電話"
                             </label>
                             <input
@@ -126,19 +126,19 @@ pub fn ContactPage() -> impl IntoView {
                                 name="phone"
                                 required
                                 placeholder="例如：0912-345-678"
-                                class="rounded-xl border border-border-gray px-4 py-3 text-sm text-ink outline-none focus:border-brand-blue"
+                                class="rounded-xl border border-border-gray px-4 py-3 text-base text-ink outline-none focus:border-brand-blue"
                             />
                         </div>
 
                         <div class="flex flex-col gap-1.5">
-                            <label for="contact-learning-stage" class="text-sm font-medium text-ink">
+                            <label for="contact-learning-stage" class="text-base font-medium text-ink">
                                 "目前的學習階段"
                             </label>
                             <select
                                 id="contact-learning-stage"
                                 name="learning_stage"
                                 required
-                                class="rounded-xl border border-border-gray bg-white px-4 py-3 text-sm text-ink outline-none focus:border-brand-blue"
+                                class="rounded-xl border border-border-gray bg-white px-4 py-3 text-base text-ink outline-none focus:border-brand-blue"
                             >
                                 {LEARNING_STAGE_OPTIONS
                                     .iter()
@@ -148,14 +148,14 @@ pub fn ContactPage() -> impl IntoView {
                         </div>
 
                         <div class="flex flex-col gap-1.5">
-                            <label for="contact-concern" class="text-sm font-medium text-ink">
+                            <label for="contact-concern" class="text-base font-medium text-ink">
                                 "目前最希望改善的狀況"
                             </label>
                             <select
                                 id="contact-concern"
                                 name="concern"
                                 required
-                                class="rounded-xl border border-border-gray bg-white px-4 py-3 text-sm text-ink outline-none focus:border-brand-blue"
+                                class="rounded-xl border border-border-gray bg-white px-4 py-3 text-base text-ink outline-none focus:border-brand-blue"
                             >
                                 {CONCERN_OPTIONS
                                     .iter()
@@ -165,7 +165,7 @@ pub fn ContactPage() -> impl IntoView {
                         </div>
 
                         <div class="flex flex-col gap-1.5">
-                            <label for="contact-message" class="text-sm font-medium text-ink">
+                            <label for="contact-message" class="text-base font-medium text-ink">
                                 "想告訴我們的事情（選填）"
                             </label>
                             <textarea
@@ -173,7 +173,7 @@ pub fn ContactPage() -> impl IntoView {
                                 name="message"
                                 rows="4"
                                 placeholder="當上一項選「其他」時，可在這裡補充說明"
-                                class="rounded-xl border border-border-gray px-4 py-3 text-sm text-ink outline-none focus:border-brand-blue"
+                                class="rounded-xl border border-border-gray px-4 py-3 text-base text-ink outline-none focus:border-brand-blue"
                             ></textarea>
                         </div>
 
@@ -194,7 +194,7 @@ pub fn ContactPage() -> impl IntoView {
                             {move || match response.get() {
                                 Some(Ok(())) => {
                                     view! {
-                                        <FadeIn class="rounded-xl bg-mist-blue px-4 py-3 text-sm text-success-green"
+                                        <FadeIn class="rounded-xl bg-mist-blue px-4 py-3 text-base text-success-green"
                                             .to_string()>
                                             "送出成功，我們會盡快與您聯繫"
                                         </FadeIn>
@@ -203,7 +203,7 @@ pub fn ContactPage() -> impl IntoView {
                                 }
                                 Some(Err(e)) => {
                                     view! {
-                                        <FadeIn class="rounded-xl bg-mist-blue px-4 py-3 text-sm text-error-red"
+                                        <FadeIn class="rounded-xl bg-mist-blue px-4 py-3 text-base text-error-red"
                                             .to_string()>
                                             {friendly_error_message(&e)}
                                         </FadeIn>
@@ -225,14 +225,14 @@ pub fn ContactPage() -> impl IntoView {
 fn ContactInfoCard() -> impl IntoView {
     view! {
         <Card class="flex flex-col gap-5 p-6 lg:p-10".to_string()>
-            <h1 class="text-2xl font-bold text-brand-blue">"先聊聊目前的學習狀況"</h1>
-            <p class="text-base leading-[1.7] text-ink">
+            <h1 class="text-3xl font-bold text-brand-blue">"先聊聊目前的學習狀況"</h1>
+            <p class="text-lg leading-[1.7] text-ink">
                 "不確定該選哪一堂課沒關係。告訴我們目前遇到的問題，我們會先一起釐清真正需要的是什麼。"
             </p>
 
             <CtaButton href=LINE_URL label="LINE 詢問" variant=ButtonVariant::Line/>
 
-            <p class="text-sm text-slate-gray">"我們會盡快透過 LINE 或電話與您聯繫"</p>
+            <p class="text-base text-slate-gray">"我們會盡快透過 LINE 或電話與您聯繫"</p>
 
             <div class="flex items-center gap-4">
                 <a
@@ -255,7 +255,7 @@ fn ContactInfoCard() -> impl IntoView {
                 </a>
             </div>
 
-            <p class="mt-auto text-xs text-slate-gray">{format!("{CONTACT_EMAIL}（後台通知信箱）")}</p>
+            <p class="mt-auto text-sm text-slate-gray">{format!("{CONTACT_EMAIL}（後台通知信箱）")}</p>
         </Card>
     }
 }

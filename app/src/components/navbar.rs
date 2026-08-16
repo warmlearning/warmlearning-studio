@@ -24,8 +24,8 @@ pub fn Navbar() -> impl IntoView {
                 <a href="/" class="flex items-center gap-2 text-brand-blue">
                     <BookIcon/>
                     <span class="flex flex-col leading-tight">
-                        <span class="text-base font-bold text-brand-blue">"知暖學習工作室"</span>
-                        <span class="text-xs uppercase tracking-widest text-slate-gray">
+                        <span class="text-lg font-bold text-brand-blue">"知暖學習工作室"</span>
+                        <span class="text-sm uppercase tracking-widest text-slate-gray">
                             "Warm Learning Studio"
                         </span>
                     </span>
@@ -36,7 +36,7 @@ pub fn Navbar() -> impl IntoView {
                         .iter()
                         .map(|(href, label)| {
                             view! {
-                                <a href=*href class="text-ink transition-colors hover:text-brand-blue">
+                                <a href=*href class="text-lg text-ink transition-colors hover:text-brand-blue">
                                     {*label}
                                 </a>
                             }
@@ -66,7 +66,7 @@ pub fn Navbar() -> impl IntoView {
                             view! {
                                 <a
                                     href=*href
-                                    class="text-ink"
+                                    class="text-lg text-ink"
                                     on:click=move |_| set_menu_open.set(false)
                                 >
                                     {*label}

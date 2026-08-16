@@ -43,7 +43,7 @@ pub fn AdminDashboardPage() -> impl IntoView {
 
         <section class="bg-white">
             <div class="mx-auto max-w-7xl px-6 py-12">
-                <h1 class="text-2xl font-bold text-brand-blue">"儀表板"</h1>
+                <h1 class="text-3xl font-bold text-brand-blue">"儀表板"</h1>
 
                 <Suspense fallback=move || view! { <p class="mt-8 text-slate-gray">"載入中…"</p> }>
                     {move || {
@@ -54,31 +54,31 @@ pub fn AdminDashboardPage() -> impl IntoView {
                                     view! {
                                         <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
                                             <div class="rounded-2xl bg-mist-blue p-6 text-center">
-                                                <p class="text-3xl font-bold text-brand-blue">{s.published_count}</p>
-                                                <p class="mt-1 text-sm text-slate-gray">"已發布公告"</p>
+                                                <p class="text-4xl font-bold text-brand-blue">{s.published_count}</p>
+                                                <p class="mt-1 text-base text-slate-gray">"已發布公告"</p>
                                             </div>
                                             <div class="rounded-2xl bg-mist-blue p-6 text-center">
-                                                <p class="text-3xl font-bold text-brand-blue">{s.draft_count}</p>
-                                                <p class="mt-1 text-sm text-slate-gray">"草稿公告"</p>
+                                                <p class="text-4xl font-bold text-brand-blue">{s.draft_count}</p>
+                                                <p class="mt-1 text-base text-slate-gray">"草稿公告"</p>
                                             </div>
                                             <div class="rounded-2xl bg-mist-blue p-6 text-center">
-                                                <p class="text-3xl font-bold text-brand-blue">
+                                                <p class="text-4xl font-bold text-brand-blue">
                                                     {s.unread_contacts_count}
                                                 </p>
-                                                <p class="mt-1 text-sm text-slate-gray">"未讀聯絡表單"</p>
+                                                <p class="mt-1 text-base text-slate-gray">"未讀聯絡表單"</p>
                                             </div>
                                         </div>
 
                                         <div class="mt-10 flex flex-wrap gap-4">
                                             <a
                                                 href="/admin/announcements/new"
-                                                class="rounded-full bg-brand-blue px-6 py-3 text-sm font-medium text-white hover:bg-[#14294F]"
+                                                class="rounded-full bg-brand-blue px-6 py-3 text-base font-medium text-white hover:bg-[#14294F]"
                                             >
                                                 "新增公告"
                                             </a>
                                             <a
                                                 href="/admin/contacts"
-                                                class="rounded-full border border-brand-blue px-6 py-3 text-sm font-medium text-brand-blue hover:bg-mist-blue"
+                                                class="rounded-full border border-brand-blue px-6 py-3 text-base font-medium text-brand-blue hover:bg-mist-blue"
                                             >
                                                 "查看聯絡表單"
                                             </a>
@@ -90,7 +90,7 @@ pub fn AdminDashboardPage() -> impl IntoView {
                                     view! {
                                         <div class="mt-8">
                                             <p class="text-error-red">{friendly_error_message(&e)}</p>
-                                            <a href="/admin/login" class="mt-2 inline-block text-sm text-brand-blue hover:underline">
+                                            <a href="/admin/login" class="mt-2 inline-block text-base text-brand-blue hover:underline">
                                                 "請重新登入"
                                             </a>
                                         </div>
