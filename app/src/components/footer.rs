@@ -7,11 +7,12 @@ use super::reveal::Reveal;
 const QUICK_LINKS: [(&str, &str); 3] = [("/contact", "聯絡我們"), ("/faq", "常見問題"), ("/privacy", "隱私權政策")];
 
 /// Footer 頁尾，對照 spec.md 5.4 節 Footer 規範與 4.1⑧
-/// v16：底色改白色，視覺背景改由固定 90px 高的動態波浪色帶負責（見 5.8 節第 4 項）
+/// v16：底色改由呼叫端依頁面最後一個區塊的底色動態帶入，波浪色帶疊在上面，
+/// 讓頁面內容與 Footer 背景無縫銜接、視覺上是同一片色塊延伸下去（見 5.8 節第 4 項）
 #[component]
-pub fn Footer() -> impl IntoView {
+pub fn Footer(#[prop(into)] bg_class: Signal<&'static str>) -> impl IntoView {
     view! {
-        <footer class="relative overflow-hidden bg-white">
+        <footer class=move || format!("relative overflow-hidden {}", bg_class.get())>
             // 波浪色帶：固定 90px 高，貼齊 Footer 最頂端，波峰觸頂（y=0）／波谷落於色帶底部
             <div class="pointer-events-none absolute inset-x-0 top-0 h-[90px] overflow-hidden" aria-hidden="true">
                 <svg class="footer-wave h-full w-[200%]" viewBox="0 0 200 100" preserveAspectRatio="none">
