@@ -23,3 +23,25 @@ body {
   font-family: var(--font-sans);
   color: var(--color-ink);
 }
+
+/* Footer 動態波浪背景飄移動畫，對照 spec.md 5.8 節第 4 項。
+   SVG 寬度是容器的 200%，波形週期為 100 個 viewBox 單位（總寬 200 內含兩個週期），
+   位移 -50% 剛好等於一個週期寬度，飄移到終點會與起點完全對齊、無縫循環。 */
+@keyframes footer-wave-drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.footer-wave {
+  animation: footer-wave-drift 26s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-wave {
+    animation: none;
+  }
+}

@@ -4,11 +4,14 @@ use leptos_meta::{Meta, Title};
 use crate::components::icons::{HeartIcon, PersonIcon, TrendUpIcon};
 use crate::components::{Card, Reveal};
 
-/// 「Penny老師想說的話」，沿用先前已定案的敘事文案，併入第三屏呈現
-/// （spec.md 4.2「Penny老師想說的話」，v15 更名並拆成兩段呈現，原名「創辦人經歷段落」）
+/// 「Penny老師想說的話」，併入第三屏呈現（spec.md 4.2「Penny老師想說的話」，
+/// v15 更名並拆成兩段呈現，原名「創辦人經歷段落」；v16 全面改寫為第一人稱，
+/// 拿掉「Penny 擁有 7 年英文教學經驗」開頭句，並在最前面新增開場金句）
+const FOUNDER_QUOTE: &str = "好的教學，不只是老師越來越會教，而是孩子慢慢越來越會學。";
+
 const FOUNDER_BIO_PARAGRAPHS: [&str; 2] = [
-    "Penny 擁有 7 年英文教學經驗，擅長在對話中快速理解真正的問題所在，用引導式的提問幫助孩子跟家長釐清想法與目標，而不是急著給答案。",
-    "她重視關係經營，相信信任感是學習動力的根本；也把多年帶班、辦活動、公開表達的經驗，轉化成一套能被複製、能被系統化執行的教學方法——這也是「知暖成長之旅 Learning Journey」的由來。",
+    "我擅長在對話中快速理解真正的問題所在，用引導式的提問幫助孩子跟家長釐清想法與目標，而不是急著給答案。",
+    "我重視關係經營，相信信任感是學習動力的根本；也把多年帶班、辦活動、公開表達的經驗，轉化成一套能被複製、能被系統化執行的教學方法——這也是「知暖成長之旅 Learning Journey」的由來。",
 ];
 
 struct BeliefCard {
@@ -64,7 +67,7 @@ fn HeroScreen() -> impl IntoView {
                     class="aspect-square w-full max-w-xs rounded-2xl object-cover"
                 />
                 <h1 class="text-4xl font-bold leading-[1.4] text-brand-blue lg:text-5xl">
-                    "從學習英文開始，建立屬於自己的學習成長系統"
+                    "從學習英文開始，" <br/> "建立屬於自己的學習成長系統"
                 </h1>
             </Reveal>
         </section>
@@ -127,7 +130,10 @@ fn WhyWarmLearningScreen() -> impl IntoView {
 
                 <Card class="mt-10 p-6".to_string()>
                     <p class="text-xl font-bold text-brand-blue">"Penny老師想說的話"</p>
-                    <div class="mt-3 flex flex-col gap-4 text-xl leading-[1.7] text-slate-gray">
+                    <blockquote class="mt-4 text-2xl font-bold leading-[1.6] text-brand-blue">
+                        "「" {FOUNDER_QUOTE} "」"
+                    </blockquote>
+                    <div class="mt-4 flex flex-col gap-4 text-xl leading-[1.7] text-slate-gray">
                         {FOUNDER_BIO_PARAGRAPHS
                             .iter()
                             .map(|paragraph| view! { <p>{*paragraph}</p> })

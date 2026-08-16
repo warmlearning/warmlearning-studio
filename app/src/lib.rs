@@ -65,6 +65,23 @@ fn AppShell() -> impl IntoView {
     let location = use_location();
     let is_admin = move || location.pathname.get().starts_with("/admin");
 
+    // Footer 底色需跟每個頁面實際最後一個區塊的底色一致，波浪才能無縫銜接、
+    // 而不是疊在一段突兀的白色（或其他不搭色塊）上面（spec.md 5.4／5.8 第 4 項）
+    let footer_bg = Signal::derive(move || {
+        let path = location.pathname.get();
+        match path.as_str() {
+            "/" => "bg-mist-blue",        // home.rs 最後為 CtaSection
+            "/courses" => "bg-mist-blue", // courses.rs 最後為 FooterCtaSection
+            "/contact" => "bg-mist-blue", // contact.rs 唯一 section
+            "/faq" => "bg-mist-blue",     // faq.rs 唯一 section
+            "/news" => "bg-mist-blue",    // news.rs NewsListPage
+            p if p.starts_with("/news/") => "bg-white", // news.rs NewsDetailPage
+            "/about" => "bg-white",       // about.rs 最後為 VisionScreen
+            "/privacy" => "bg-white",     // privacy.rs 唯一 section
+            _ => "bg-white",              // 404 等其他情況，比照 not_found.rs
+        }
+    });
+
     view! {
         <Show when=move || !is_admin()>
             <Navbar/>
@@ -95,7 +112,7 @@ fn AppShell() -> impl IntoView {
             </Routes>
         </main>
         <Show when=move || !is_admin()>
-            <Footer/>
+            <Footer bg_class=footer_bg/>
         </Show>
         <Show when=move || !is_admin()>
             <FloatingLineButton/>
