@@ -253,7 +253,7 @@ pub fn AdminAnnouncementFormPage() -> impl IntoView {
 
         <section class="bg-white">
             <div class="mx-auto max-w-3xl px-6 py-12">
-                <h1 class="text-2xl font-bold text-brand-blue">
+                <h1 class="text-3xl font-bold text-brand-blue">
                     {move || if id.get().is_some() { "編輯公告" } else { "新增公告" }}
                 </h1>
 
@@ -267,7 +267,7 @@ pub fn AdminAnnouncementFormPage() -> impl IntoView {
                                     view! {
                                         <div class="mt-8">
                                             <p class="text-error-red">{friendly_error_message(&e)}</p>
-                                            <a href="/admin/login" class="mt-2 inline-block text-sm text-brand-blue hover:underline">
+                                            <a href="/admin/login" class="mt-2 inline-block text-base text-brand-blue hover:underline">
                                                 "請重新登入"
                                             </a>
                                         </div>
@@ -343,7 +343,7 @@ fn AnnouncementForm(id: Option<i64>, initial: Option<AnnouncementEditData>) -> i
             {id.map(|id| view! { <input type="hidden" name="id" value=id.to_string()/> })}
 
             <div class="flex flex-col gap-1.5">
-                <label for="ann-title" class="text-sm font-medium text-ink">
+                <label for="ann-title" class="text-base font-medium text-ink">
                     "標題"
                 </label>
                 <input
@@ -352,12 +352,12 @@ fn AnnouncementForm(id: Option<i64>, initial: Option<AnnouncementEditData>) -> i
                     name="title"
                     required
                     value=initial_title
-                    class="rounded-xl border border-border-gray px-4 py-3 text-sm text-ink outline-none focus:border-brand-blue"
+                    class="rounded-xl border border-border-gray px-4 py-3 text-base text-ink outline-none focus:border-brand-blue"
                 />
             </div>
 
             <div class="flex flex-col gap-1.5">
-                <label for="ann-slug" class="text-sm font-medium text-ink">
+                <label for="ann-slug" class="text-base font-medium text-ink">
                     "網址代稱（選填，留空則自動產生）"
                 </label>
                 <input
@@ -366,37 +366,37 @@ fn AnnouncementForm(id: Option<i64>, initial: Option<AnnouncementEditData>) -> i
                     name="slug"
                     value=initial_slug
                     placeholder="例如 summer-camp-2026"
-                    class="rounded-xl border border-border-gray px-4 py-3 text-sm text-ink outline-none focus:border-brand-blue"
+                    class="rounded-xl border border-border-gray px-4 py-3 text-base text-ink outline-none focus:border-brand-blue"
                 />
             </div>
 
             <div class="flex flex-col gap-1.5">
-                <span class="text-sm font-medium text-ink">"內文"</span>
+                <span class="text-base font-medium text-ink">"內文"</span>
                 <div class="flex flex-wrap gap-2 rounded-t-xl border border-b-0 border-border-gray bg-mist-blue p-2">
                     <button
                         type="button"
-                        class="rounded-md bg-white px-3 py-1 text-sm font-bold shadow-sm"
+                        class="rounded-md bg-white px-3 py-1 text-base font-bold shadow-sm"
                         on:click=exec("bold")
                     >
                         "B"
                     </button>
                     <button
                         type="button"
-                        class="rounded-md bg-white px-3 py-1 text-sm shadow-sm"
+                        class="rounded-md bg-white px-3 py-1 text-base shadow-sm"
                         on:click=exec("insertUnorderedList")
                     >
                         "• 項目符號"
                     </button>
                     <button
                         type="button"
-                        class="rounded-md bg-white px-3 py-1 text-sm shadow-sm"
+                        class="rounded-md bg-white px-3 py-1 text-base shadow-sm"
                         on:click=exec("insertLineBreak")
                     >
                         "換行"
                     </button>
                     <button
                         type="button"
-                        class="rounded-md bg-white px-3 py-1 text-sm shadow-sm"
+                        class="rounded-md bg-white px-3 py-1 text-base shadow-sm"
                         on:click=insert_image
                     >
                         "插入圖片"
@@ -407,13 +407,13 @@ fn AnnouncementForm(id: Option<i64>, initial: Option<AnnouncementEditData>) -> i
                     contenteditable="true"
                     inner_html=initial_content
                     on:input=move |_| sync_content()
-                    class="min-h-[220px] rounded-b-xl border border-border-gray px-4 py-3 text-sm leading-[1.7] text-ink outline-none focus:border-brand-blue"
+                    class="min-h-[220px] rounded-b-xl border border-border-gray px-4 py-3 text-base leading-[1.7] text-ink outline-none focus:border-brand-blue"
                 ></div>
                 <input type="hidden" name="content" prop:value=move || content_html.get()/>
             </div>
 
             <div class="flex flex-col gap-1.5">
-                <label for="ann-image" class="text-sm font-medium text-ink">
+                <label for="ann-image" class="text-base font-medium text-ink">
                     "封面圖片（選填，jpg／png／webp，上限 5MB）"
                 </label>
                 {existing_cover_image
@@ -427,18 +427,18 @@ fn AnnouncementForm(id: Option<i64>, initial: Option<AnnouncementEditData>) -> i
                     type="file"
                     name="cover_image"
                     accept="image/jpeg,image/png,image/webp"
-                    class="text-sm text-ink"
+                    class="text-base text-ink"
                 />
             </div>
 
             <div class="flex flex-col gap-1.5">
-                <label for="ann-status" class="text-sm font-medium text-ink">
+                <label for="ann-status" class="text-base font-medium text-ink">
                     "發布狀態"
                 </label>
                 <select
                     id="ann-status"
                     name="status"
-                    class="rounded-xl border border-border-gray bg-white px-4 py-3 text-sm text-ink outline-none focus:border-brand-blue"
+                    class="rounded-xl border border-border-gray bg-white px-4 py-3 text-base text-ink outline-none focus:border-brand-blue"
                 >
                     <option value="draft" selected=initial_status == "draft">
                         "草稿"
@@ -450,7 +450,7 @@ fn AnnouncementForm(id: Option<i64>, initial: Option<AnnouncementEditData>) -> i
             </div>
 
             <div class="flex flex-col gap-1.5">
-                <label for="ann-published-at" class="text-sm font-medium text-ink">
+                <label for="ann-published-at" class="text-base font-medium text-ink">
                     "發布日期（選填，留空為現在；可設定未來時間排程發布）"
                 </label>
                 <input
@@ -458,7 +458,7 @@ fn AnnouncementForm(id: Option<i64>, initial: Option<AnnouncementEditData>) -> i
                     type="datetime-local"
                     name="published_at"
                     value=initial_published_at
-                    class="rounded-xl border border-border-gray px-4 py-3 text-sm text-ink outline-none focus:border-brand-blue"
+                    class="rounded-xl border border-border-gray px-4 py-3 text-base text-ink outline-none focus:border-brand-blue"
                 />
             </div>
 

@@ -108,11 +108,11 @@ pub fn AdminLoginPage() -> impl IntoView {
         <section class="bg-mist-blue">
             <div class="mx-auto flex min-h-[70vh] max-w-md flex-col justify-center px-6 py-16">
                 <div class="rounded-2xl bg-white p-8 shadow-md">
-                    <h1 class="text-center text-2xl font-bold text-brand-blue">"後台登入"</h1>
+                    <h1 class="text-center text-3xl font-bold text-brand-blue">"後台登入"</h1>
 
                     <ActionForm action=login_action attr:class="mt-8 flex flex-col gap-5">
                         <div class="flex flex-col gap-1.5">
-                            <label for="login-username" class="text-sm font-medium text-ink">
+                            <label for="login-username" class="text-base font-medium text-ink">
                                 "帳號"
                             </label>
                             <input
@@ -121,12 +121,12 @@ pub fn AdminLoginPage() -> impl IntoView {
                                 name="username"
                                 required
                                 autocomplete="username"
-                                class="rounded-xl border border-border-gray px-4 py-3 text-sm text-ink outline-none focus:border-brand-blue"
+                                class="rounded-xl border border-border-gray px-4 py-3 text-base text-ink outline-none focus:border-brand-blue"
                             />
                         </div>
 
                         <div class="flex flex-col gap-1.5">
-                            <label for="login-password" class="text-sm font-medium text-ink">
+                            <label for="login-password" class="text-base font-medium text-ink">
                                 "密碼"
                             </label>
                             <input
@@ -135,7 +135,7 @@ pub fn AdminLoginPage() -> impl IntoView {
                                 name="password"
                                 required
                                 autocomplete="current-password"
-                                class="rounded-xl border border-border-gray px-4 py-3 text-sm text-ink outline-none focus:border-brand-blue"
+                                class="rounded-xl border border-border-gray px-4 py-3 text-base text-ink outline-none focus:border-brand-blue"
                             />
                         </div>
 
@@ -147,7 +147,7 @@ pub fn AdminLoginPage() -> impl IntoView {
                         </button>
 
                         <Show when=move || matches!(response.get(), Some(Err(_)))>
-                            <p class="rounded-xl bg-mist-blue px-4 py-3 text-center text-sm text-error-red">
+                            <p class="rounded-xl bg-mist-blue px-4 py-3 text-center text-base text-error-red">
                                 {move || {
                                     response
                                         .get()

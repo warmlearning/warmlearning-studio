@@ -28,7 +28,7 @@ pub fn ImagePlaceholder(
 ) -> impl IntoView {
     view! {
         <div class=format!(
-            "flex items-center justify-center bg-pale-blue text-center text-sm text-slate-gray {class}",
+            "flex items-center justify-center bg-pale-blue text-center text-base text-slate-gray {class}",
         )>
             <span>{label}</span>
         </div>

@@ -82,7 +82,7 @@ pub fn AdminContactsPage() -> impl IntoView {
 
         <section class="bg-white">
             <div class="mx-auto max-w-5xl px-6 py-12">
-                <h1 class="text-2xl font-bold text-brand-blue">"聯絡表單留言"</h1>
+                <h1 class="text-3xl font-bold text-brand-blue">"聯絡表單留言"</h1>
 
                 <Suspense fallback=move || view! { <p class="mt-8 text-slate-gray">"載入中…"</p> }>
                     {move || {
@@ -113,25 +113,25 @@ pub fn AdminContactsPage() -> impl IntoView {
                                                             >
                                                                 <div class="flex flex-wrap items-center gap-3">
                                                                     <Show when=move || !is_read>
-                                                                        <span class="rounded-full bg-warm-amber px-2 py-0.5 text-xs font-medium text-ink">
+                                                                        <span class="rounded-full bg-warm-amber px-2 py-0.5 text-sm font-medium text-ink">
                                                                             "未讀"
                                                                         </span>
                                                                     </Show>
                                                                     <span class="font-medium text-ink">{item.name.clone()}</span>
-                                                                    <span class="text-sm text-slate-gray">{item.phone.clone()}</span>
-                                                                    <span class="text-sm text-slate-gray">
+                                                                    <span class="text-base text-slate-gray">{item.phone.clone()}</span>
+                                                                    <span class="text-base text-slate-gray">
                                                                         {item.learning_stage.clone().unwrap_or_else(|| "未填寫".to_string())}
                                                                     </span>
-                                                                    <span class="text-sm text-slate-gray">
+                                                                    <span class="text-base text-slate-gray">
                                                                         {item.concern.clone().unwrap_or_else(|| "未填寫".to_string())}
                                                                     </span>
                                                                 </div>
-                                                                <span class="text-xs text-slate-gray">{item.created_at.clone()}</span>
+                                                                <span class="text-sm text-slate-gray">{item.created_at.clone()}</span>
                                                             </div>
 
                                                             <Show when=move || expanded_id.get() == Some(id)>
                                                                 <div class="mt-3 flex flex-col gap-3 border-t border-border-gray pt-3">
-                                                                    <p class="text-sm leading-[1.7] text-ink">
+                                                                    <p class="text-base leading-[1.7] text-ink">
                                                                         {item
                                                                             .message
                                                                             .clone()
@@ -142,7 +142,7 @@ pub fn AdminContactsPage() -> impl IntoView {
                                                                         <Show when=move || !is_read>
                                                                             <button
                                                                                 type="button"
-                                                                                class="rounded-full bg-brand-blue px-4 py-1.5 text-xs font-medium text-white hover:bg-[#14294F]"
+                                                                                class="rounded-full bg-brand-blue px-4 py-1.5 text-sm font-medium text-white hover:bg-[#14294F]"
                                                                                 on:click=move |ev| {
                                                                                     ev.stop_propagation();
                                                                                     leptos::task::spawn_local(async move {
@@ -157,7 +157,7 @@ pub fn AdminContactsPage() -> impl IntoView {
                                                                         </Show>
                                                                         <button
                                                                             type="button"
-                                                                            class="rounded-full border border-error-red px-4 py-1.5 text-xs font-medium text-error-red hover:bg-error-red/10"
+                                                                            class="rounded-full border border-error-red px-4 py-1.5 text-sm font-medium text-error-red hover:bg-error-red/10"
                                                                             on:click=move |ev| {
                                                                                 ev.stop_propagation();
                                                                                 let confirmed = leptos::web_sys::window()
@@ -189,7 +189,7 @@ pub fn AdminContactsPage() -> impl IntoView {
                                     view! {
                                         <div class="mt-8">
                                             <p class="text-error-red">{friendly_error_message(&e)}</p>
-                                            <a href="/admin/login" class="mt-2 inline-block text-sm text-brand-blue hover:underline">
+                                            <a href="/admin/login" class="mt-2 inline-block text-base text-brand-blue hover:underline">
                                                 "請重新登入"
                                             </a>
                                         </div>

@@ -19,7 +19,7 @@ pub fn NotFoundPage() -> impl IntoView {
         <section class="bg-white">
             <div class="mx-auto flex max-w-xl flex-col items-center gap-6 px-6 py-24 text-center">
                 <img src="/img/illustration-404.png" alt="" class="w-48 sm:w-64"/>
-                <h1 class="text-2xl font-bold text-brand-blue">"這個頁面好像不小心迷路了"</h1>
+                <h1 class="text-3xl font-bold text-brand-blue">"這個頁面好像不小心迷路了"</h1>
                 <p class="text-slate-gray">"你要找的頁面不存在，或已經被移動了。"</p>
                 <CtaButton href="/" label="返回首頁" variant=ButtonVariant::Primary/>
             </div>

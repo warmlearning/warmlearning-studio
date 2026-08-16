@@ -13,7 +13,7 @@ pub fn AdminNav() -> impl IntoView {
             <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-4 text-white">
                 <div class="flex flex-wrap items-center gap-6">
                     <span class="font-bold">"知暖後台管理"</span>
-                    <nav class="flex flex-wrap items-center gap-4 text-sm">
+                    <nav class="flex flex-wrap items-center gap-4 text-base">
                         <a href="/admin" class="hover:underline">
                             "儀表板"
                         </a>
@@ -28,7 +28,7 @@ pub fn AdminNav() -> impl IntoView {
                 <ActionForm action=logout_action>
                     <button
                         type="submit"
-                        class="rounded-full border border-white/60 px-4 py-1.5 text-sm text-white transition-colors hover:bg-white/10"
+                        class="rounded-full border border-white/60 px-4 py-1.5 text-base text-white transition-colors hover:bg-white/10"
                     >
                         "登出"
                     </button>
